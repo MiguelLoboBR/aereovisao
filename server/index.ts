@@ -69,16 +69,14 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    // ✅ Redirecionar "/" para o site institucional
-    app.get("/", (req, res) => {
-  const indexPath = path.join(process.cwd(), "dist", "institucional", "index.html");
-  res.sendFile(indexPath);
+
+    // ✅ Redirecionar "/" para o site institucional (versão final para produção)
+app.get("/", (req, res) => {
+  const institucionalIndexPath = path.join(__dirname, "../dist/institucional/index.html");
+  console.log("Servindo página institucional raiz:", institucionalIndexPath);
+  res.sendFile(institucionalIndexPath);
 });
-    app.get("/", (req, res) => {
-      const institucionalIndexPath = path.join(process.cwd(), "institucional", "index.html");
-      console.log("Servindo página institucional raiz:", institucionalIndexPath);
-      res.sendFile(institucionalIndexPath);
-    });
+
 
     // Servir arquivos do frontend (modo produção)
     serveStatic(app);
