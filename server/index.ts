@@ -8,85 +8,130 @@ import { initializeInstitucionalAdmin } from "./initialize-institucional";
 const app = express();
 
 // CORS padrão Replit
-app.use(cors({
-  origin: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Arquivos estáticos
-app.use('/uploads', express.static('uploads'));
-app.use('/assets', express.static('public/assets'));
-app.use('/institucional', express.static(path.join(process.cwd(), 'institucional')));
-app.use('/admin-direto', express.static(path.join(process.cwd(), 'institucional/admin-direto')));
-app.use('/institucional/public', express.static('institucional/public'));
-app.use('/attached_assets', express.static('attached_assets'));
-
-// Middleware de log detalhado
-app.use((req, res, next) => {
-  const start = Date.now();
-  const path = req.path;
-  const origin = req.headers.origin || 'unknown';
-
-  console.log(`[${new Date().toISOString()}] ${req.method} ${path} - Origin: ${origin}`);
-
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
-    const logLine = `${req.method} ${path} ${res.statusCode} :: ${JSON.stringify(bodyJson)}`;
-    log(logLine.length > 100 ? logLine.slice(0, 100) + "…" : logLine);
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
-
-  res.on("finish", () => {
-    const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
-      log(`${req.method} ${path} ${res.statusCode} in ${duration}ms`);
-    }
-  });
-
-  next();
-});
+// Arquivos estáticos gerais
+app.use(
+  "/uploads",
+  express.static(path.join(process.cwd(), "uploads"))
+);
+app.use(
+  "/assets",
+  express.static(path.join(process.cwd(), "public", "assets"))
+);
+app.use(
+  "/attached_assets",
+  express.static(path.join(process.cwd(), "attached_assets"))
+);
 
 (async () => {
-  // Inicialização institucional
+  // Inicialização institucional (banco, seed, etc.)
   await initializeInstitucionalAdmin();
 
+  // Registrar rotas e obter o servidor HTTP
   const server = await registerRoutes(app);
 
-  // Tratamento global de erros
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    console.error("Erro na aplicação:", err);
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    res.status(status).json({ message });
+  // Middleware de log detalhado
+  app.use((req, res, next) => {
+    const start = Date.now();
+    const reqPath = req.path;
+    const origin = req.headers.origin || "unknown";
+
+    console.log(
+      `[${new Date().toISOString()}] ${req.method} ${reqPath} - Origin: ${origin}`
+    );
+
+    const originalJson = res.json.bind(res);
+    res.json = (bodyJson: any, ...args: any[]) => {
+      const logLine = `${req.method} ${reqPath} ${res.statusCode} :: ${JSON.stringify(
+        bodyJson
+      )}`;
+      log(
+        logLine.length > 100
+          ? logLine.slice(0, 100) + "…"
+          : logLine
+      );
+      return originalJson(bodyJson, ...args);
+    };
+
+    res.on("finish", () => {
+      const duration = Date.now() - start;
+      if (reqPath.startsWith("/api")) {
+        log(`${req.method} ${reqPath} ${res.statusCode} em ${duration}ms`);
+      }
+    });
+
+    next();
   });
 
-  // Vite apenas no modo desenvolvimento
-  if (app.get("env") === "development") {
+  // Global error handler
+  app.use(
+    (err: any, _req: Request, res: Response, _next: NextFunction) => {
+      console.error("Erro na aplicação:", err);
+      const status = err.status || err.statusCode || 500;
+      const message = err.message || "Internal Server Error";
+      res.status(status).json({ message });
+    }
+  );
+
+  if (process.env.NODE_ENV === "development") {
+    // Modo desenvolvimento com Vite
     await setupVite(app, server);
   } else {
+    // Produção
 
-    // ✅ Redirecionar "/" para o site institucional (versão final para produção)
-app.get("/", (req, res) => {
-// aqui process.cwd() é a raiz onde está dist/
-const institucionalIndexPath = path.join(process.cwd(), "dist", "institucional", "index.html");
-console.log("Servindo página institucional raiz:", institucionalIndexPath);
-res.sendFile(institucionalIndexPath);
-});
-    
-    // Servir arquivos do frontend (modo produção)
+    // Servir assets do site institucional (dist/institucional)
+    app.use(
+      "/institucional",
+      express.static(
+        path.join(process.cwd(), "dist", "institucional")
+      )
+    );
+    app.use(
+      "/admin-direto",
+      express.static(
+        path.join(
+          process.cwd(),
+          "dist",
+          "institucional",
+          "admin-direto"
+        )
+      )
+    );
+
+    // Rota raiz para o index institucional
+    app.get("/", (_req, res) => {
+      const institucionalIndexPath = path.join(
+        process.cwd(),
+        "dist",
+        "institucional",
+        "index.html"
+      );
+      console.log(
+        `Servindo institucional raiz: ${institucionalIndexPath}`
+      );
+      res.sendFile(institucionalIndexPath);
+    });
+
+    // Servir o React build (SPA) em dist/public
     serveStatic(app);
   }
 
-  // Porta padrão no Railway
-  const port = process.env.PORT || 8080;
+  // Start do servidor na porta que o Railway fornecer
+  const port = Number(process.env.PORT) || 8080;
   server.listen(
     {
-      port: +port,
+      port,
       host: "0.0.0.0",
       reusePort: true,
     },
@@ -95,4 +140,3 @@ res.sendFile(institucionalIndexPath);
     }
   );
 })();
-
