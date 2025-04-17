@@ -1,0 +1,100 @@
+Perfeito, Miguel. Com isso, o sistema fica completo em estrutura e controle de permissões. Abaixo está o **prompt técnico final e completo**, que inclui:
+
+- Painel de gerenciamento de postagens  
+- Visualização dinâmica por categoria  
+- E agora, o **Painel de Administração de Usuários**, exclusivo para nível **admin**
+
+---
+
+## 🔧 Prompt Técnico Atualizado — Portal do Piloto
+
+**Objetivo**: Finalizar a integração do sistema com:
+1. Exibição dinâmica de postagens por categoria
+2. Rota detalhada por post (`/post/:id`)
+3. Painel de administração de usuários com controle de nível de acesso
+
+---
+
+### ✅ Parte 1 – Visualização de Postagens por Categoria
+
+**Páginas:**
+- `/dicas` → mostra posts com `categoria: "dicas"`
+- `/firmware` → mostra posts com `categoria: "firmware"`
+- `/legislacao` → mostra posts com `categoria: "legislacao"`
+
+**Requisitos técnicos:**
+- Fazer `GET /api/posts?categoria={categoria}`
+- Exibir cards com título, trecho do conteúdo, autor e data
+- Link “Ler mais” para rota individual `/post/:id`
+
+---
+
+### ✅ Parte 2 – Página de Postagem Individual
+
+- Rota: `/post/:id`
+- Fazer `GET /api/posts/:id`
+- Exibir post completo com título, autor, data, categoria e conteúdo renderizado
+
+---
+
+### ✅ Parte 3 – Painel Administrativo de Usuários
+
+**Nova Rota:** `/admin/usuarios`
+
+🔒 **Acesso restrito**: apenas para usuários com `role: "admin"`
+
+#### Funcionalidades:
+- Listar todos os usuários cadastrados
+- Ver:
+  - Nome
+  - E-mail (se tiver)
+  - Nível de acesso atual
+  - Data de cadastro
+- Botão para alterar o nível de acesso (ex: de `usuario` para `colaborador` ou `admin`)
+- Todo novo cadastro entra como `usuario` por padrão
+
+---
+
+### 🧠 Regras de Permissão
+
+| Nível        | Permissões                                                                 |
+|--------------|----------------------------------------------------------------------------|
+| `usuario`    | Apenas visualizar conteúdos                                               |
+| `colaborador`| Pode criar postagens via painel `/admin/post`                             |
+| `admin`      | Pode acessar `/admin/post` **e** `/admin/usuarios`, controlar níveis      |
+| `ChatGPT`    | Cadastrado manualmente com role `colaborador` e integração por API        |
+
+---
+
+### 🛠 Backend (API Necessária)
+
+1. `GET /api/usuarios` → listar todos os usuários (admin only)
+2. `PATCH /api/usuarios/:id` → atualizar nível de acesso
+3. `GET /api/posts?categoria=x`
+4. `GET /api/posts/:id`
+
+---
+
+### 🧩 Frontend - Telas a Criar
+
+- `Dicas.jsx`, `Firmware.jsx`, `Legislacao.jsx` → listam por categoria
+- `PostView.jsx` → post completo
+- `AdminUsuarios.jsx` → gerenciamento de usuários com dropdown de nível
+- Reforçar no menu lateral: rotas administrativas aparecem apenas se `role === 'admin'`
+
+---
+
+### 🔐 Segurança e UX
+
+- Proteção de rotas por nível (via Context API ou middleware)
+- Validação de token e role
+- Feedback visual nas alterações (toasts ou alerts)
+
+---
+
+Se quiser, posso agora:
+1. Criar as páginas `Dicas.jsx`, `Firmware.jsx`, `Legislacao.jsx`
+2. Gerar o `PostView.jsx`
+3. Estruturar o `AdminUsuarios.jsx` com API mock para testar
+
+Deseja que eu gere esses arquivos já com exemplo visual e backend base?

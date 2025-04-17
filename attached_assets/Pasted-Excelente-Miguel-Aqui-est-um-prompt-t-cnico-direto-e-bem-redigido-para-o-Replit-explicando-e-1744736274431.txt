@@ -1,0 +1,82 @@
+Excelente, Miguel! Aqui está um **prompt técnico direto e bem redigido para o Replit**, explicando exatamente o que você quer que seja feito:
+
+---
+
+## 🔧 Prompt Técnico – Versão Mobile com Links de Download
+
+### ✅ Objetivo:
+Atualizar a **página inicial (Home)** e o **menu principal** do projeto **Portal do Piloto** com informações sobre a **versão mobile (PWA)**, com destaque para compatibilidade Android/iOS e links visuais para download.
+
+---
+
+### 🖼️ Instruções para a Página Inicial (`Home.jsx` ou `home.html`):
+
+Adicionar uma **seção visual** destacando que o sistema também está disponível como **aplicativo para dispositivos móveis**.
+
+#### 📋 Conteúdo da Seção:
+
+**Título:**  
+📲 Disponível também no seu celular
+
+**Texto explicativo:**  
+Você pode instalar o Portal do Piloto no seu dispositivo móvel!  
+Acesse pelo navegador do Android ou iOS e clique em “Adicionar à Tela Inicial” para usar como aplicativo.
+
+> Também estamos trabalhando em versões diretas para download nas lojas oficiais.
+
+#### 🔗 Elementos Visuais a Incluir:
+- Ícone Android (Google Play) — com link de download (ou temporário desabilitado)
+- Ícone iOS (App Store) — com link de download (ou “em breve”)
+- Instruções resumidas:
+  - "Para instalar, acesse via navegador e clique em ‘Adicionar à Tela Inicial’"
+- Se possível, usar `badge` oficial da Play Store/App Store (mesmo que links estejam em construção)
+
+---
+
+### 📁 Estrutura visual sugerida:
+
+```jsx
+<section className="mt-8 p-6 bg-gray-100 rounded-lg text-center">
+  <h2 className="text-2xl font-bold mb-2">📱 Disponível também no seu celular</h2>
+  <p className="mb-4 text-gray-700">
+    Instale o Portal do Piloto como um aplicativo no seu smartphone e tenha acesso rápido às atualizações e dicas onde estiver.
+  </p>
+  <div className="flex justify-center items-center gap-4">
+    <a href="#" className="opacity-50 cursor-not-allowed">
+      <img src="/assets/google-play-badge.png" alt="Em breve na Google Play" className="h-12" />
+    </a>
+    <a href="#" className="opacity-50 cursor-not-allowed">
+      <img src="/assets/app-store-badge.png" alt="Em breve na App Store" className="h-12" />
+    </a>
+  </div>
+  <p className="text-sm mt-4 text-gray-500 italic">
+    Enquanto isso, instale via navegador: Menu → Adicionar à Tela Inicial
+  </p>
+</section>
+```
+
+---
+
+### 🧭 Instrução para o Menu Principal:
+
+Adicionar uma nova opção de menu:
+
+```
+📲 Baixar versão mobile
+```
+
+- Quando clicado, pode levar para uma seção ancorada na home ou abrir um `modal` com as instruções de instalação.
+- Ícone recomendado: `📲` ou similar.
+- Visível para todos, mesmo que não estejam logados.
+
+---
+
+### 🔒 Observação técnica
+
+- As imagens `google-play-badge.png` e `app-store-badge.png` devem estar em `/public/assets/` ou pasta equivalente
+- Pode ser usado o padrão oficial fornecido pelo Google/Apple
+- Mesmo que ainda não haja app publicado, deixe o visual e call-to-action prontos
+
+---
+
+Se quiser, posso gerar os trechos JSX prontos para colar na sua home, menu e assets. Deseja que eu prepare isso agora?

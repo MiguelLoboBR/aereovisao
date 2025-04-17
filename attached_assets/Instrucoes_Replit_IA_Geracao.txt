@@ -1,0 +1,140 @@
+
+📦 INSTRUÇÕES COMPLETAS PARA A IA DO REPLIT – GERAÇÃO DE POST AUTOMÁTICO (ChatGPT IA)
+
+OBJETIVO:
+Implementar a funcionalidade do botão "Criar agora" na tela de configuração da IA. Isso permitirá que um post seja gerado automaticamente com base nas instruções configuradas, usando a API da OpenAI e publicando em nome do usuário colaborador "ia@aereovisao.com.br".
+
+---
+
+✅ ETAPA 1 – BACKEND
+
+1. Criar o arquivo: server/routes/admin/ia-generate.ts
+2. Inserir o seguinte código:
+
+(importar código do arquivo "Api Ia Generate" fornecido por ChatGPT)
+Codigo: 
+
+import express from "express";
+import { authenticateToken, requireAdmin } from "../../middleware/auth";
+import { prisma } from "../../lib/prisma";
+import fetch from "node-fetch";
+
+const router = express.Router();
+
+router.post("/api/admin/ia-generate", authenticateToken, requireAdmin, async (req, res) => {
+  const { openaiKey, model, temperature, topics, instructions } = req.body;
+
+  if (!openaiKey || !model || !topics || !instructions) {
+    return res.status(400).json({ error: "Parâmetros ausentes" });
+  }
+
+  try {
+    const prompt = `${instructions}\n\nTópicos: ${topics}\n\nFormato: HTML formatado para publicação.`;
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${openaiKey}`
+      },
+      body: JSON.stringify({
+        model,
+        temperature: parseFloat(temperature || "0.7"),
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content;
+    if (!content) throw new Error("Resposta inválida da OpenAI");
+
+    const iaUser = await prisma.user.findFirst({ where: { email: "ia@aereovisao.com.br" } });
+    if (!iaUser) return res.status(404).json({ error: "Usuário IA não encontrado" });
+
+    const newPost = await prisma.post.create({
+      data: {
+        titulo: `Post automático - ${new Date().toLocaleDateString()}`,
+        conteudo: content,
+        categoria: "noticia",
+        authorId: iaUser.id,
+        publicado: true
+      }
+    });
+
+    return res.status(200).json({ success: true, postId: newPost.id });
+  } catch (err) {
+    console.error("Erro IA:", err);
+    return res.status(500).json({ error: "Erro ao gerar conteúdo." });
+  }
+});
+
+export default router;
+
+
+
+
+
+3. Certificar-se de que a rota esteja registrada no Express em server/index.ts:
+import iaGenerateRoute from './routes/admin/ia-generate'
+app.use(iaGenerateRoute)
+
+4. Garantir que o middleware de autenticação esteja funcionando corretamente:
+- authenticateToken (valida JWT)
+- requireAdmin (valida role === 'admin')
+
+5. Validar que o usuário com email 'ia@aereovisao.com.br' existe no banco (PostgreSQL).
+
+---
+
+✅ ETAPA 2 – FRONTEND (IAConfig.tsx ou IAConfigClean.tsx)
+
+1. Adicionar a função de chamada da geração:
+
+```tsx
+const handleCriarAgora = async () => {
+  try {
+    const res = await apiRequest("POST", "/api/admin/ia-generate", {
+      openaiKey: form.openaiKey,
+      model: form.model,
+      temperature: form.temperature,
+      topics: form.topics,
+      instructions: form.instructions,
+    });
+    toast.success("Post criado com sucesso!");
+  } catch (err) {
+    toast.error("Erro ao gerar post automático.");
+  }
+};
+```
+
+2. Conectar a função ao botão “Criar agora”:
+
+```tsx
+<Button onClick={handleCriarAgora}>
+  <Play className="mr-2 h-4 w-4" /> Criar agora
+</Button>
+```
+
+---
+
+✅ ETAPA 3 – VALIDAÇÃO
+
+- A IA deve ser capaz de gerar um conteúdo HTML formatado com base no prompt.
+- O post deve ser criado automaticamente com:
+  - Título: "Post automático - [data]"
+  - Categoria: noticia
+  - Publicado: true
+  - Autor: ia@aereovisao.com.br
+- Exibir um toast de sucesso/erro.
+
+---
+
+✅ EXTRAS OPCIONAIS
+
+- Adicionar botão “Executar agora” no painel de IA
+- Adicionar flag `publicado: true` direto na criação
+- (Futuro) permitir seleção de categoria ao gerar o post
+
+---
+
+🧠 Qualquer dúvida, a referência completa do projeto está no ZIP fornecido: Portal-do-Piloto_ia.zip

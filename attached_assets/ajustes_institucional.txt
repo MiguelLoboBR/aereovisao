@@ -1,0 +1,41 @@
+==================== admin-auth.js ====================
+
+document.getElementById("login-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const senha = document.getElementById("senha").value;
+
+  const resposta = await fetch("/institucional/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, senha })
+  });
+
+  const resultado = await resposta.json();
+
+  if (resposta.ok && resultado.token) {
+    localStorage.setItem("token", resultado.token);
+    window.location.href = "/institucional/admin/index.html";  // Redireciona após login
+  } else {
+    alert("Credenciais inválidas. Tente novamente.");
+  }
+});
+
+
+=======================================================
+
+==================== App.tsx ==========================
+
+Insira esse trecho no início da função App():
+
+// Trecho para inserir no início da função App() após os imports
+if (window.location.pathname.startsWith("/institucional")) {
+  return null; // Impede que React Router interfira no site institucional
+}
+
+
+=======================================================
+
+Essas alterações devem impedir o React Router de redirecionar para /auth
+e permitir que o login institucional funcione corretamente.

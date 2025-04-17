@@ -1,0 +1,76 @@
+Show, Miguel! Seu código está excelente — muito bem estruturado e responsivo 👏  
+Agora, para atender exatamente o que você pediu:
+
+### ✅ Reposicionar o bloco `Aplicativo Mobile` da `<div id="app-mobile">` para a **área do card azul (hero)** no canto superior direito, de forma reduzida e elegante — como mostrado na **imagem com marcação amarela**.
+
+---
+
+## 🛠️ O que precisa ser feito no seu código `.tsx`
+
+### 🔄 **PASSO A PASSO para o Replit**:
+
+---
+
+### 1. 🔁 **Remover o bloco atual "Aplicativo Mobile" da posição abaixo do Hero**
+
+```tsx
+{/* Aplicativo Mobile */}
+<div id="app-mobile" className="bg-white p-6 md:p-8 mb-8 rounded-xl shadow-sm">
+  ...
+</div>
+```
+
+> ❌ Remover ou comentar esta parte.
+
+---
+
+### 2. ✅ **Substituir por um bloco compacto no canto superior direito do Hero**
+
+Logo dentro da sua `<div className="relative text-center px-4">`  
+adicione **depois do `<div className="mx-auto h-24 w-24...">`**, um bloco assim:
+
+```tsx
+<div className="absolute top-4 right-4 hidden md:block">
+  <div className="bg-white p-3 rounded-lg shadow-md w-[220px] text-left">
+    <h3 className="text-sm font-bold text-gray-800 mb-1">📱 Disponível no celular</h3>
+    <p className="text-xs text-gray-600 mb-2 leading-snug">
+      Instale como app: <br />
+      Menu → "Adicionar à Tela Inicial"
+    </p>
+    <div className="flex gap-2">
+      <img
+        src="/assets/google-play-badge.svg"
+        alt="Google Play"
+        className="h-5 opacity-50"
+        title="Em breve na Google Play"
+      />
+      <img
+        src="/assets/app-store-badge.svg"
+        alt="App Store"
+        className="h-5 opacity-50"
+        title="Em breve na App Store"
+      />
+    </div>
+  </div>
+</div>
+```
+
+---
+
+### 🧠 Por que isso funciona?
+
+- O `absolute top-4 right-4` posiciona o card no canto superior direito do Hero
+- O `hidden md:block` garante que só apareça em telas médias ou maiores
+- Layout leve, informativo e sem ocupar muito espaço
+- Integra bem com o fundo azul sem poluir o visual
+
+---
+
+### 📦 Observações finais
+
+- Certifique-se de que os arquivos `google-play-badge.svg` e `app-store-badge.svg` estão mesmo em `/public/assets/`
+- Se quiser que também apareça no mobile, troque `hidden md:block` por `block`
+
+---
+
+Se quiser, posso gerar o snippet final 100% substituível direto na parte certa do seu `<Home />`. Deseja isso?

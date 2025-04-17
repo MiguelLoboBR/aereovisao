@@ -1,0 +1,103 @@
+Ótimo, Miguel — com **Firebase para autenticação** e **PostgreSQL como banco de dados**, aqui vai a **instrução completa, pronta para IA do Replit ou Dreamflow**, considerando exatamente esse cenário:
+
+---
+
+## 🛠️ **Ajuste técnico para conteúdo HTML com Firebase + PostgreSQL**
+
+---
+
+### ✅ 1. **Schema de validação Zod (`postFormSchema.ts`)**
+
+> O campo `conteudo` agora recebe HTML formatado do editor (`ReactQuill`).  
+A validação precisa aceitar isso como uma string comum.
+
+```ts
+import { z } from "zod";
+
+export const postFormSchema = z.object({
+  titulo: z.string().min(3, "Título obrigatório"),
+  categoria: z.string().nonempty("Categoria obrigatória"),
+  youtubeUrl: z.string().url("URL inválida").optional(),
+  conteudo: z
+    .string()
+    .min(5, "Conteúdo deve ter pelo menos 5 caracteres")
+    .max(50000, "Conteúdo muito longo"),
+});
+```
+
+> 📌 Não sanitizar ou rejeitar tags HTML. A validação trata apenas tamanho.
+
+---
+
+### ✅ 2. **Model PostgreSQL (Exemplo com Prisma)**
+
+> No banco PostgreSQL, o campo `conteudo` deve aceitar HTML longo.  
+Use o tipo `TEXT` no schema.
+
+#### Exemplo em Prisma:
+```prisma
+model Post {
+  id          Int      @id @default(autoincrement())
+  titulo      String
+  categoria   String
+  youtubeUrl  String?  @db.Text
+  conteudo    String   @db.Text
+  imagem      String?
+  anexo       String?
+  anexoNome   String?
+  createdAt   DateTime @default(now())
+  authorId    Int
+}
+```
+
+> ✅ `@db.Text` garante espaço para HTML formatado sem truncar.
+
+---
+
+### ✅ 3. **No backend (`server/posts.ts`)**
+
+> Garanta que o conteúdo do corpo está sendo lido como string normal:
+
+```ts
+const { titulo, conteudo, youtubeUrl, categoria } = req.body;
+```
+
+✅ **Não tente fazer `JSON.parse(req.body.conteudo)`** — isso quebraria o HTML.
+
+---
+
+### ✅ 4. **Visualização segura do HTML (no frontend)**
+
+> Para exibir o conteúdo salvo (HTML), use:
+
+```tsx
+<div
+  className="prose max-w-full"
+  dangerouslySetInnerHTML={{ __html: post.conteudo }}
+/>
+```
+
+> ✅ Essa prática é padrão para conteúdos vindos de editores WYSIWYG.
+
+---
+
+## 🔐 Segurança com Firebase
+
+> Apenas usuários autenticados com nível `admin` ou `colaborador` devem poder enviar HTML no post.  
+A verificação já deve existir no backend:
+
+```ts
+app.post("/api/posts", authMiddleware, colaboradorMiddleware, upload.fields([...]), handler);
+```
+
+---
+
+## ✅ Conclusão para IA
+
+**Atualize a validação Zod e o campo no PostgreSQL para aceitar HTML como texto.  
+Não transforme o conteúdo no backend, apenas armazene como está.  
+Renderize o HTML no frontend com segurança e formatação.**
+
+---
+
+Se desejar, posso montar um arquivo completo `postFormSchema.ts` ou o trecho Prisma adaptado com essas definições. Deseja?

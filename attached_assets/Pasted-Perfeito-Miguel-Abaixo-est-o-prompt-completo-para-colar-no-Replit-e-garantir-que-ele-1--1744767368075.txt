@@ -1,0 +1,55 @@
+Perfeito, Miguel! Abaixo está o **prompt completo** para colar no Replit e garantir que ele:
+
+1. **Remova o antigo usuário IA injetado diretamente no banco**  
+2. **Ajuste a rota da página de configuração da IA para que não use o sidebar/layout principal**
+3. **Corrija o carregamento e salvamento das configurações da IA**
+4. **Garanta que o novo usuário `ia@aereovisao.com.br` com papel `colaborador` seja usado na automação**
+
+---
+
+### ✅ Prompt para IA Replit
+
+```plaintext
+1. Exclua qualquer usuário antigo criado manualmente para uso da IA diretamente no banco de dados. O usuário correto agora é:
+   - Email: ia@aereovisao.com.br
+   - Nome: ChatGPT IA
+   - Nível de acesso: colaborador
+   - Este usuário já foi criado normalmente via painel e deve ser usado para postagens automatizadas.
+
+2. Corrija a página de Configuração da IA (Config. IA) conforme abaixo:
+
+✅ A) Layout:
+- A página `/admin/ia-simples` deve usar um layout limpo (sem sidebar).
+- Utilize o componente `CleanLayout.tsx` apenas nessa rota.
+- A rota deve ser registrada fora do `<AppLayout>` no arquivo de rotas (App.tsx ou routes.tsx):
+
+```tsx
+<Route path="/admin/ia-simples" element={<IAConfigClean />} />
+```
+
+✅ B) Correção de erro:
+- O erro "Não foi possível carregar as configurações da IA" ocorre porque a rota `/api/admin/ia-config` está falhando.
+- Crie ou corrija essa rota no backend para:
+  - `GET /api/admin/ia-config`: retorna as configurações da IA do banco
+  - `POST /api/admin/ia-config`: salva ou atualiza as configurações
+  - Ambas exigem autenticação como `admin`
+  - Use o cabeçalho JWT já enviado pela função `apiRequest`
+
+✅ C) Vincule as postagens automáticas da IA a esse novo usuário `ia@aereovisao.com.br`.
+
+✅ D) Opcional: se possível, exiba no painel um indicativo de qual usuário será usado como IA para publicar (ex: campo só leitura com nome e e-mail).
+
+3. Teste o botão “Salvar Configurações da IA” e verifique se:
+   - Os dados estão sendo salvos corretamente no banco (PostgreSQL ou Firebase)
+   - O botão exibe toast de sucesso ou erro corretamente
+   - A automação futura use o novo usuário IA
+
+4. **Extra:** se o endpoint da IA usar cron jobs, certifique-se de que o usuário esteja autenticado com token válido antes de postar.
+
+```
+
+---
+
+Esse prompt cobre **tudo o que foi solicitado e ajustado até agora**. Assim que colar no Replit, ele deve conseguir executar a tarefa corretamente.
+
+Se quiser, posso também gerar o **modelo de rota do backend** ou uma **tela de exibição do usuário IA**, é só avisar!

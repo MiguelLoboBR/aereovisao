@@ -1,0 +1,79 @@
+Miguel, aqui está o que confirmei:
+
+---
+
+## ✅ Verificação da função de requisição (client-side)
+
+📌 **Nenhuma função `apiRequest` ou equivalente foi encontrada do lado do cliente (frontend)**.  
+O arquivo que encontramos (`server/api.ts`) é referente ao **servidor Express**, responsável por rotas e uploads, e **não injeta headers com token**.
+
+---
+
+## 🧩 O problema pode estar sendo causado porque:
+
+- O frontend está fazendo `fetch()` ou `axios.post()` **diretamente**, **sem enviar o token JWT nos headers**
+- Isso faz o middleware do backend (`authMiddleware`) **barrar a requisição**
+- E como o erro retorna um HTML (`401 Unauthorized`), o frontend quebra ao tentar interpretar como JSON, gerando:
+  - `Failed to fetch`
+  - `Invalid token`
+  - `Unexpected token '<'`
+
+---
+
+## ✅ O que você precisa adicionar ao frontend
+
+Aqui vai um modelo de função `apiRequest` segura com envio do token:
+
+### 🔐 Crie um arquivo `lib/apiRequest.ts` com:
+
+```ts
+export async function apiRequest(
+  url: string,
+  options: RequestInit = {}
+): Promise<any> {
+  const token = localStorage.getItem("token"); // ou useAuthJWT()
+
+  const headers = {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers || {}),
+  };
+
+  const response = await fetch(url, {
+    ...options,
+    headers,
+  });
+
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Erro ${response.status}: ${text}`);
+  }
+
+  return response.json();
+}
+```
+
+---
+
+### 🧪 Como usar ao criar o post:
+
+```ts
+await apiRequest("/api/posts", {
+  method: "POST",
+  body: JSON.stringify(data),
+});
+```
+
+> 🔄 Substituir o `fetch(...)` direto por `apiRequest(...)`
+
+---
+
+## ✅ Conclusão
+
+- O token **não está sendo enviado** nas requisições protegidas
+- Isso causa **bloqueio no backend** e erro de parse no frontend
+- Solução: **padronizar as chamadas com uma função `apiRequest`** que injeta o token no header
+
+---
+
+Deseja que eu gere esse arquivo já formatado para você colar direto no projeto?

@@ -1,0 +1,136 @@
+Perfeito, Miguel. Para garantir que a IA do Replit **compreenda completamente o fluxo e integre sem erro**, aqui está o **bloco completo de instrução para a função `handleSubmitPost()`**, com:
+
+- Variáveis auxiliares necessárias
+- Integração com React Hook Form
+- Observações de compatibilidade com o backend (multer + JWT)
+
+---
+
+## 📦 Instruções completas para o Replit — Criação de Post com Upload e Rich Text
+
+---
+
+### ✅ 1. **Requisitos de ambiente e dependências já consideradas:**
+
+- `React Hook Form` com `useForm()` ativo
+- Token JWT armazenado em `localStorage` com a chave `"token"`
+- Backend usando `multer.fields([{ name: 'imagem' }, { name: 'anexo' }])`
+
+---
+
+### ✅ 2. **Configuração no topo do componente `PostManager.tsx`**
+
+```tsx
+import { useForm } from "react-hook-form";
+import { toast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import { queryClient } from "@/lib/queryClient";
+
+const { register, handleSubmit, reset: resetForm, control } = useForm();
+
+const [submitting, setSubmitting] = useState(false);
+const [imagemSelecionada, setImagemSelecionada] = useState<File | null>(null);
+const [anexoSelecionado, setAnexoSelecionado] = useState<File | null>(null);
+```
+
+> Use `setImagemSelecionada` e `setAnexoSelecionado` nos inputs `<input type="file">` para capturar os arquivos selecionados.
+
+---
+
+### ✅ 3. **Função `handleSubmitPost()` completa e revisada**
+
+```tsx
+const handleSubmitPost = async (values: any) => {
+  try {
+    setSubmitting(true);
+
+    const formData = new FormData();
+    formData.append('titulo', values.titulo);
+    formData.append('categoria', values.categoria);
+    formData.append('youtubeUrl', values.youtubeUrl || '');
+    formData.append('conteudo', values.conteudo || '');
+
+    if (imagemSelecionada instanceof File) {
+      formData.append('imagem', imagemSelecionada);
+    }
+
+    if (anexoSelecionado instanceof File) {
+      formData.append('anexo', anexoSelecionado);
+    }
+
+    const token = localStorage.getItem("token");
+
+    const response = await fetch('/api/posts', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(`Erro ${response.status}: ${text}`);
+    }
+
+    toast({
+      title: "Postagem criada com sucesso!",
+      variant: "success",
+    });
+
+    resetForm();
+    setImagemSelecionada(null);
+    setAnexoSelecionado(null);
+    queryClient.invalidateQueries(['posts']);
+
+  } catch (error: any) {
+    console.error("Erro ao criar post:", error);
+    toast({
+      title: "Erro ao criar post",
+      description: error.message || "Erro desconhecido.",
+      variant: "destructive",
+    });
+  } finally {
+    setSubmitting(false);
+  }
+};
+```
+
+---
+
+### ✅ 4. **Exemplo de inputs de arquivo**
+
+```tsx
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    if (e.target.files?.[0]) setImagemSelecionada(e.target.files[0]);
+  }}
+/>
+
+<input
+  type="file"
+  accept=".pdf,.zip,.rar"
+  onChange={(e) => {
+    if (e.target.files?.[0]) setAnexoSelecionado(e.target.files[0]);
+  }}
+/>
+```
+
+---
+
+### ✅ 5. **Uso no botão do formulário**
+
+```tsx
+<form onSubmit={handleSubmit(handleSubmitPost)}>
+  {/* ...inputs do formulário */}
+  <button type="submit" disabled={submitting}>
+    {submitting ? "Enviando..." : "Criar Postagem"}
+  </button>
+</form>
+```
+
+---
+
+Com essas instruções, a IA do Replit ou outro assistente pode reconstruir todo o fluxo corretamente, compatível com seu backend atual. Se quiser, posso compactar isso em um arquivo `.tsx` de exemplo pronto. Deseja isso?

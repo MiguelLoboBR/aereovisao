@@ -1,0 +1,120 @@
+Ótimo, Miguel! Com base no seu feedback de que a versão HTML puro ficou visualmente “crua” e que **você aprova o uso de React**, aqui está a **versão adaptada do prompt para criação do projeto no DreamFlow ou outra IA de desenvolvimento**, com foco em **design profissional**, **modularização**, e **compatibilidade PWA elegante**.
+
+---
+
+## 🔧 Prompt Modernizado — **React + Node.js + PWA**
+
+**Crie um sistema web modular e responsivo com frontend em React (JSX), backend em Node.js (Express) e estrutura compatível com PWA.**  
+O nome do projeto é:  
+### **Aéreo Visão – Portal do Piloto**
+
+---
+
+### 🧰 Tecnologias obrigatórias
+
+- **Frontend:** React (JSX), Vite ou CRA, TailwindCSS (ou CSS Modules)
+- **Backend:** Node.js com Express
+- **Banco (opcional):** Firebase Firestore ou SQLite (configurável)
+- **PWA:** sim – com manifest.json e service worker
+- **Compatibilidade:** 100% com Web, Android e iOS via PWA
+- **Sem autenticação obrigatória. Layout informativo, elegante e de fácil expansão**
+
+---
+
+### 📁 Estrutura Modular Recomendada
+
+```
+/client
+  ├── public/
+  │   ├── manifest.json
+  │   └── logo.png
+  ├── src/
+  │   ├── App.jsx
+  │   ├── index.jsx
+  │   ├── /pages
+  │   │   ├── Home.jsx
+  │   │   ├── Legislacao.jsx
+  │   │   ├── Firmware.jsx
+  │   │   ├── Dicas.jsx
+  │   │   ├── Doacoes.jsx
+  │   │   ├── Patrocinadores.jsx
+  │   │   └── Agradecimento.jsx
+  │   └── /components
+  │       ├── Header.jsx
+  │       └── Footer.jsx
+  └── /styles (ou Tailwind)
+
+/server
+  ├── server.js
+  ├── /routes
+  ├── /utils
+  └── config.json (dados Pix, links de pagamento, patrocinadores)
+
+root/
+  └── package.json
+```
+
+---
+
+### 🧩 Módulos do sistema
+
+1. **Home**
+   - Apresentação com logomarca da Aéreo Visão, nome "Portal do Piloto"
+   - Menu moderno (header fixo ou lateral)
+   - Frase institucional no rodapé
+
+2. **Legislação**
+   - Exibição de leis da ANAC, DECEA, IBAMA, etc.
+   - Interface elegante com ícones e seções colapsáveis
+
+3. **Firmware / Aplicativos**
+   - Lista de atualizações por fabricante (DJI, FIMI, Autel)
+   - Cards ou blocos visuais modernos
+
+4. **Dicas**
+   - Tutoriais, boas práticas e recomendações visuais
+   - Espaço para vídeos embutidos e imagens
+
+5. **Doações**
+   - Botão “Copiar chave Pix” funcional
+   - Link para PayPal, MercadoPago ou outro (via config)
+   - Mensagem de apoio com imagem opcional
+
+6. **Patrocinadores**
+   - Carrossel de logos com links
+   - Dados carregados dinamicamente de `config.json`
+
+7. **Agradecimento**
+   - Página clean com mensagem de “Obrigado por apoiar o projeto”
+
+---
+
+### 🎯 Funcionalidades e Estilo
+
+- Visual moderno com **tipografia limpa, cores neutras e detalhes em azul aeronáutico**
+- Componente de cabeçalho e rodapé reaproveitáveis
+- Roteamento com React Router (se necessário)
+- Manifest configurado corretamente
+- Suporte completo a instalação como PWA
+
+---
+
+### 🛡️ Considerações Técnicas
+
+- Estrutura modular com componentes reutilizáveis
+- Estático e leve: ideal para hospedagem em Firebase Hosting, Vercel, Replit
+- Todos os dados de doações e patrocinadores devem ser centralizados em `config.json` no backend
+- Pode ser estendido futuramente com autenticação, painel admin, push notification e login Firebase
+
+---
+
+### 📝 Observação final
+
+> Este é um projeto gratuito, de utilidade pública, com foco em pilotos de drone recreativos e profissionais. A plataforma deve ser intuitiva, elegante, leve, responsiva e compatível com navegadores modernos e instalação como aplicativo PWA.
+
+---
+
+📦 Esse texto pode ser colado diretamente no DreamFlow ou passado para um desenvolvedor React como briefing técnico.  
+Se quiser, posso seguir agora e gerar essa estrutura base em React + Node.js já com suas cores, logo e PWA funcionando.
+
+Deseja?

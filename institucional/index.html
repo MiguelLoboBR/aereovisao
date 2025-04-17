@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aéreo Visão - A visão que encanta</title>
+  <meta name="description" content="Portal de recursos para pilotos de drones, oferecendo informações sobre legislação, firmwares, dicas e muito mais.">
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/institucional/public/css/styles.css">
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="/" class="logo-container">
+        <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="logo">
+      </a>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <nav class="nav-links">
+        <a href="#inicio" class="nav-link">Início</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#servicos" class="nav-link">Serviços</a>
+        <a href="#galeria" class="nav-link">Galeria</a>
+        <a href="#portal" class="nav-link">Portal do Piloto</a>
+        <a href="#contato" class="nav-link">Contato</a>
+        <a href="javascript:void(0);" class="nav-link admin-link" id="admin-login-link" onclick="goToAdminLogin()"><i class="fas fa-lock"></i></a>
+        <script>
+          // Função para navegação direta, evitando completamente o roteamento React
+          function goToAdminLogin() {
+            // Utilizar window.location.replace para maior garantia de que o React Router não interfira
+            window.location.replace('/institucional/admin/login.html');
+            return false; // Impedir propagação do evento
+          }
+        </script>
+      </nav>
+    </div>
+  </header>
+  
+  <!-- Seção Principal (Hero) -->
+  <section id="inicio" class="hero">
+    <h1 class="hero-title">A visão que encanta</h1>
+    <p class="hero-subtitle">Soluções profissionais de fotografia, filmagem e inspeção aérea com drones</p>
+  </section>
+  
+  <!-- Recursos/Funcionalidades -->
+  <section id="servicos" class="features section">
+    <div class="container">
+      <h2 class="section-title">Nossos Serviços</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-camera feature-icon"></i>
+          <h3 class="feature-title">Fotografia Aérea</h3>
+          <p class="feature-text">Serviços profissionais de fotografia aérea com drones para eventos, paisagens e publicidade.</p>
+          <a href="/institucional/public/servicos/fotografia-aerea.html" class="btn btn-sm">Saiba mais</a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-video feature-icon"></i>
+          <h3 class="feature-title">Filmagem Aérea</h3>
+          <p class="feature-text">Captura de vídeos aéreos em alta resolução para eventos, documentários e promoções comerciais.</p>
+          <a href="/institucional/public/servicos/filmagem-aerea.html" class="btn btn-sm">Saiba mais</a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-home feature-icon"></i>
+          <h3 class="feature-title">Imóveis e Tour 360°</h3>
+          <p class="feature-text">Filmagens e fotografias aéreas para imóveis com opção de tour virtual em 360 graus.</p>
+          <a href="/institucional/public/servicos/imoveis-tour-360.html" class="btn btn-sm">Saiba mais</a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-building feature-icon"></i>
+          <h3 class="feature-title">Inspeções de Construção</h3>
+          <p class="feature-text">Monitoramento e inspeção aérea de construções civis, avaliando estruturas e progresso de obras.</p>
+          <a href="/institucional/public/servicos/inspecoes-construcao.html" class="btn btn-sm">Saiba mais</a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-map-marked-alt feature-icon"></i>
+          <h3 class="feature-title">Mapeamento e Topografia</h3>
+          <p class="feature-text">Serviços de mapeamento aéreo, topografia e georreferenciamento com drones de alta precisão.</p>
+          <a href="/institucional/public/servicos/mapeamento-topografia.html" class="btn btn-sm">Saiba mais</a>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-graduation-cap feature-icon"></i>
+          <h3 class="feature-title">Treinamento de Pilotos</h3>
+          <p class="feature-text">Formação profissional para pilotos de drones com certificação e acompanhamento especializado.</p>
+          <a href="/institucional/public/servicos/treinamento-pilotos.html" class="btn btn-sm">Saiba mais</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Sobre Nós -->
+  <section id="sobre" class="about section">
+    <div class="container">
+      <h2 class="section-title">Sobre a Aéreo Visão</h2>
+      <div class="about-content">
+        <div>
+          <p class="about-text">A Aéreo Visão foi fundada com a missão de fornecer recursos de qualidade para pilotos de drones no Brasil. Nosso objetivo é criar uma comunidade de pilotos bem informados e capacitados.</p>
+          <p class="about-text">Desde 2020, temos trabalhado para compilar e disponibilizar informações atualizadas sobre legislação, tutoriais técnicos e recursos para pilotos de todos os níveis.</p>
+          <p class="about-text">Nossa equipe é formada por pilotos experientes, especialistas em tecnologia e entusiastas de drones que compartilham a paixão por voos seguros e responsáveis.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Drone sobrevoando paisagem" class="about-image">
+      </div>
+    </div>
+  </section>
+  
+  <!-- Galeria -->
+  <section id="galeria" class="projects section">
+    <div class="container">
+      <h2 class="section-title">Nossa Galeria</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mapeamento aéreo" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">Mapeamento Aéreo</h3>
+            <p class="project-text">Soluções de mapeamento com drones para agricultura de precisão e planejamento urbano.</p>
+            <a href="#" class="btn">Saiba Mais</a>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1508514077092-f2e9b98a2f66?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Inspeção de infraestrutura" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">Inspeção de Infraestrutura</h3>
+            <p class="project-text">Inspeção de torres, linhas de transmissão e outras estruturas críticas com drones.</p>
+            <a href="#" class="btn">Saiba Mais</a>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Fotografia e Filmagem Aérea" class="project-image">
+          <div class="project-content">
+            <h3 class="project-title">Fotografia e Filmagem</h3>
+            <p class="project-text">Serviços profissionais de fotografia e filmagem aérea para eventos e publicidade.</p>
+            <a href="#" class="btn">Saiba Mais</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Portal do Piloto -->
+  <section id="portal" class="portal-features section">
+    <div class="container">
+      <h2 class="section-title">Portal do Piloto</h2>
+      <p class="portal-subtitle">O seu centro de comando para tudo que envolve drones no Brasil</p>
+      
+      <div class="portal-cards">
+        <div class="portal-card">
+          <div class="portal-card-icon">
+            <i class="fas fa-gavel"></i>
+          </div>
+          <h3 class="portal-card-title">Legislação</h3>
+          <p class="portal-card-text">Tenha acesso às leis e regulamentações da ANAC, DECEA e IBAMA para operar seu drone legalmente.</p>
+        </div>
+        
+        <div class="portal-card">
+          <div class="portal-card-icon">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <h3 class="portal-card-title">Firmware</h3>
+          <p class="portal-card-text">Atualizações por fabricante: DJI, FIMI, Autel e mais. Mantenha seu equipamento atualizado.</p>
+        </div>
+        
+        <div class="portal-card">
+          <div class="portal-card-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3 class="portal-card-title">Dicas e Tutoriais</h3>
+          <p class="portal-card-text">Melhore suas habilidades com tutoriais, boas práticas e recomendações de pilotos experientes.</p>
+        </div>
+      </div>
+      
+      <div class="portal-benefits">
+        <h3 class="portal-benefits-title">Benefícios de usar o Portal</h3>
+        <div class="portal-benefits-grid">
+          <div class="portal-benefit">
+            <i class="fas fa-check-circle"></i>
+            <p><strong>Informações centralizadas</strong> – Acesse todas as regulamentações e informações sobre drones em um só lugar</p>
+          </div>
+          
+          <div class="portal-benefit">
+            <i class="fas fa-check-circle"></i>
+            <p><strong>Atualizações em tempo real</strong> – Receba as mais recentes atualizações de firmware e legislação diretamente</p>
+          </div>
+          
+          <div class="portal-benefit">
+            <i class="fas fa-check-circle"></i>
+            <p><strong>Compartilhamento de conhecimento</strong> – Contribua com dicas e aprenda com outros pilotos</p>
+          </div>
+          
+          <div class="portal-benefit">
+            <i class="fas fa-check-circle"></i>
+            <p><strong>Compatibilidade multi-dispositivo</strong> – Disponível como aplicativo para Android e iOS, além da versão web</p>
+          </div>
+        </div>
+        
+        <div class="portal-cta">
+          <a href="javascript:void(0);" onclick="window.location.href=window.location.origin + '/app/dashboard';" class="btn btn-lg">Acessar o Portal do Piloto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Contato -->
+  <section id="contato" class="contact section">
+    <div class="container">
+      <h2 class="section-title">Entre em Contato</h2>
+      <form class="contact-form" onsubmit="submitContactForm(event)">
+        <div class="form-group">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" id="name" name="name" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" id="email" name="email" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="subject" class="form-label">Assunto</label>
+          <input type="text" id="subject" name="subject" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="message" class="form-label">Mensagem</label>
+          <textarea id="message" name="message" class="form-textarea" required></textarea>
+        </div>
+        
+        <button type="submit" class="btn">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+  
+
+  
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <div>
+          <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="footer-logo">
+          <p class="footer-text">A Aéreo Visão é dedicada a fornecer recursos e informações de qualidade para pilotos de drones.</p>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Links Rápidos</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#inicio">Início</a></li>
+            <li class="footer-link"><a href="#sobre">Sobre</a></li>
+            <li class="footer-link"><a href="#servicos">Serviços</a></li>
+            <li class="footer-link"><a href="#galeria">Galeria</a></li>
+            <li class="footer-link"><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Nosso Portal</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="javascript:void(0);" onclick="window.location.href=window.location.origin + '/app/dashboard';">Acesso ao Portal</a></li>
+            <li class="footer-link"><a href="javascript:void(0);" onclick="window.location.href=window.location.origin + '/app/dicas';">Dicas e Tutoriais</a></li>
+            <li class="footer-link"><a href="javascript:void(0);" onclick="window.location.href=window.location.origin + '/app/legislacao';">Legislação</a></li>
+            <li class="footer-link"><a href="javascript:void(0);" onclick="window.location.href=window.location.origin + '/app/firmware';">Firmwares</a></li>
+            <li class="footer-link"><a href="javascript:void(0);" onclick="window.location.href=window.location.origin + '/app/noticias';">Notícias</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="footer-title">Contato</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="mailto:contato@aereovisao.com.br" class="contact-email">contato@aereovisao.com.br</a></li>
+            <li class="footer-link"><a href="tel:+5511999999999" class="contact-phone">(11) 99999-9999</a></li>
+            <li class="footer-link">São Paulo, SP - Brasil</li>
+          </ul>
+          <div class="social-links" style="margin-top: 1rem;">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" style="margin-right: 1rem; color: white;"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" style="margin-right: 1rem; color: white;"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" style="margin-right: 1rem; color: white;"><i class="fab fa-youtube"></i></a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" style="color: white;"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 Aéreo Visão. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="/institucional/public/js/main.js"></script>
+</body>
+</html>

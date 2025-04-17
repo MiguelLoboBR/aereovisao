@@ -1,0 +1,120 @@
+Perfeito, Miguel. Com a definição de que o sistema será hospedado na **Railway**, vou montar agora o **documento definitivo e estruturado** para você enviar à IA do Replit.
+
+Esse documento orienta **passo a passo tudo o que ela deve fazer**, desde a criação do usuário da IA até o painel administrativo de controle e integração com a OpenAI.
+
+---
+
+## 📦 Instruções para IA do Replit – Integração Automática da IA no Portal do Piloto (Railway Ready)
+
+---
+
+### ✅ 1. Criar usuário colaborador para a IA
+
+Crie um registro fixo no banco de dados com os seguintes dados:
+
+```json
+{
+  "nome": "ChatGPT IA",
+  "email": "ia@aereovisao.com.br",
+  "role": "colaborador",
+  "ativo": true
+}
+```
+
+Esse será o autor oficial das postagens automáticas da IA.
+
+---
+
+### ✅ 2. Criar rota segura `POST /api/posts/ia`
+
+Essa rota recebe requisições automáticas da IA e **cria postagens no sistema**.
+
+#### Requisitos:
+- Verificar header `x-api-key` com valor igual a `process.env.IA_SECRET_KEY`
+- Buscar o usuário da IA pelo email `"ia@aereovisao.com.br"`
+- Criar nova postagem com os seguintes dados:
+
+```ts
+{
+  titulo: string,
+  resumo?: string,
+  conteudo: string (HTML),
+  categoria: "dicas" | "firmware" | "legislacao" | "noticia",
+  imagem?: string (URL da imagem de capa),
+  anexo?: string (URL de PDF ou zip)
+}
+```
+
+- Associar `authorId` com o ID do usuário da IA
+
+---
+
+### ✅ 3. Criar painel administrativo `/admin/config-ia`
+
+Criar página visível apenas para administradores com os seguintes campos configuráveis:
+
+| Campo                         | Tipo             |
+|------------------------------|------------------|
+| Ativar IA                    | Toggle (on/off)  |
+| Quantidade de posts por dia  | Número inteiro   |
+| Categorias ativas            | Multiselect      |
+| Horário de execução (local)  | HH:MM (ex: 10:00) |
+| Prompt base para a IA        | Textarea         |
+| Idioma                       | Select (pt-BR, en-US) |
+| Usuário autor (exibido)      | Fixar como `ia@aereovisao.com.br` |
+
+#### Backend:
+- Criar tabela `config_ia` (se PostgreSQL)
+- Criar endpoints:
+  - `GET /api/config/ia`
+  - `PUT /api/config/ia`
+
+Essas configurações serão utilizadas pelo robô da IA diariamente.
+
+---
+
+### ✅ 4. Criar robô automático da IA (cron ou script)
+
+Crie um script Node.js (`/scripts/iaBot.ts`) que:
+
+1. Faz `GET` em `/api/config/ia`
+2. Se a IA estiver **ativada**, gera conteúdo para cada categoria configurada
+3. Usa a API da OpenAI (ChatGPT) com o `prompt base` para gerar:
+   - Título
+   - Conteúdo HTML
+   - Resumo
+   - Imagem de capa (pode ser sugestão de link)
+   - PDF (opcional, apenas se citado)
+
+4. Envia `POST` para `/api/posts/ia` com cabeçalho `x-api-key`
+
+---
+
+### ✅ 5. Agendamento
+
+- No Replit: usar `setInterval()` ou `@replit/extensions/cron`
+- No Railway: usar `node-cron` (ex: 1x por dia às 10h)
+- Adicionar fallback manual com botão "Executar IA agora" no painel `/admin/config-ia` (opcional)
+
+---
+
+### ✅ 6. Variáveis de ambiente obrigatórias
+
+No `.env`:
+
+```
+OPENAI_API_KEY=sua-chave-gpt
+IA_SECRET_KEY=uma-chave-segura-aereovisao
+```
+
+---
+
+### ✅ 7. Resultado final esperado
+
+- IA publica conteúdo diariamente com base nas categorias configuradas
+- Admin controla regras sem editar código
+- Sistema funciona no Replit e já está preparado para Railway com domínio `aereovisao.com.br`
+
+---
+
+Se desejar, posso agora gerar os **arquivos completos em `.ts/.tsx` para subir no projeto**. Deseja que eu inicie por algum?

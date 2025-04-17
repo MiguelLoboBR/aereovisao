@@ -1,0 +1,202 @@
+{
+  "donation": {
+    "pixKey": "00112233445566778899",
+    "pixName": "Aéreo Visão",
+    "pixBank": "AcmePay",
+    "paypalUrl": "https://paypal.me/example",
+    "cardUrl": "https://example.com/donate"
+  },
+  "sponsors": {
+    "premium": [
+      {
+        "name": "Teste 1",
+        "description": "Especialista em Drones Profissionais",
+        "url": "#",
+        "type": "premium"
+      },
+      {
+        "name": "Nome da Empresa 2",
+        "description": "Acessórios e Peças para Drones",
+        "url": "#"
+      },
+      {
+        "name": "Nome da Empresa 3",
+        "description": "Escola de Pilotagem de Drones",
+        "url": "#"
+      },
+      {
+        "name": "Miguel",
+        "description": "",
+        "url": "www.aereovisao.com.br",
+        "logo": "",
+        "type": "premium"
+      }
+    ],
+    "partners": [
+      {
+        "name": "Parceiro 2"
+      },
+      {
+        "name": "Parceiro 3"
+      },
+      {
+        "name": "Parceiro 4"
+      },
+      {
+        "name": "Miguel",
+        "description": "",
+        "url": "",
+        "logo": "",
+        "type": "partner"
+      }
+    ]
+  },
+  "supporters": [
+    {
+      "id": "1",
+      "name": "João D.",
+      "initials": "JD"
+    },
+    {
+      "id": "2",
+      "name": "Maria S.",
+      "initials": "MS"
+    },
+    {
+      "id": "3",
+      "name": "Ricardo L.",
+      "initials": "RL"
+    },
+    {
+      "id": "4",
+      "name": "Ana P.",
+      "initials": "AP"
+    },
+    {
+      "id": "5",
+      "name": "Carlos F.",
+      "initials": "CF"
+    },
+    {
+      "id": "6",
+      "name": "Paula T.",
+      "initials": "PT"
+    },
+    {
+      "id": "7",
+      "name": "Roberto M.",
+      "initials": "RM"
+    },
+    {
+      "id": "8",
+      "name": "Lucia B.",
+      "initials": "LB"
+    }
+  ],
+  "firmwares": {
+    "manufacturers": [
+      {
+        "name": "DJI",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/0/0e/DJI_logo.svg",
+        "bgImage": "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80",
+        "firmwares": [
+          {
+            "model": "DJI Mini 3 Pro",
+            "version": "v01.12.0140",
+            "date": "24/06/2023",
+            "downloadUrl": "https://www.dji.com/downloads/products/mini-3-pro"
+          },
+          {
+            "model": "DJI Air 2S",
+            "version": "v01.04.0602",
+            "date": "15/06/2023",
+            "downloadUrl": "https://www.dji.com/downloads/products/air-2s"
+          },
+          {
+            "model": "DJI FPV",
+            "version": "v01.02.0000",
+            "date": "05/05/2023",
+            "downloadUrl": "https://www.dji.com/downloads/products/fpv"
+          }
+        ],
+        "siteUrl": "https://www.dji.com"
+      },
+      {
+        "name": "Autel Robotics",
+        "bgImage": "https://images.unsplash.com/photo-1572618252869-3b644e2294ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80",
+        "firmwares": [
+          {
+            "model": "Autel EVO II",
+            "version": "v2.3.56",
+            "date": "12/06/2023",
+            "downloadUrl": "https://www.autelrobotics.com/downloads"
+          },
+          {
+            "model": "Autel EVO Nano+",
+            "version": "v1.4.28",
+            "date": "08/05/2023",
+            "downloadUrl": "https://www.autelrobotics.com/downloads"
+          },
+          {
+            "model": "Autel EVO Lite+",
+            "version": "v1.2.26",
+            "date": "30/04/2023",
+            "downloadUrl": "https://www.autelrobotics.com/downloads"
+          }
+        ],
+        "siteUrl": "https://www.autelrobotics.com"
+      },
+      {
+        "name": "FIMI",
+        "bgImage": "https://images.unsplash.com/photo-1578034487139-55524a960209?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80",
+        "firmwares": [
+          {
+            "model": "FIMI X8 Mini",
+            "version": "v1.0.6.1",
+            "date": "05/06/2023",
+            "downloadUrl": "https://www.fimi.com/fimi-x8-mini/downloads"
+          },
+          {
+            "model": "FIMI X8 SE 2022",
+            "version": "v2.2.1.2",
+            "date": "28/05/2023",
+            "downloadUrl": "https://www.fimi.com/fimi-x8-se-2022/downloads"
+          },
+          {
+            "model": "FIMI X8 SE 2020",
+            "version": "v01.00.0600",
+            "date": "15/04/2023",
+            "downloadUrl": "https://www.fimi.com/fimi-x8-se-2020/downloads"
+          }
+        ],
+        "siteUrl": "https://www.fimi.com"
+      }
+    ]
+  },
+  "apps": [
+    {
+      "name": "DJI Fly",
+      "icon": "fas fa-mobile-alt",
+      "androidUrl": "https://play.google.com/store/apps/details?id=dji.go.v5",
+      "iosUrl": "https://apps.apple.com/app/dji-fly/id1474512741"
+    },
+    {
+      "name": "Autel Explorer",
+      "icon": "fas fa-mobile-alt",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.autel.explorer",
+      "iosUrl": "https://apps.apple.com/app/autel-explorer/id1448215982"
+    },
+    {
+      "name": "FIMI Navi App",
+      "icon": "fas fa-mobile-alt",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.fimi.app",
+      "iosUrl": "https://apps.apple.com/app/mi-drone/id1425765517"
+    },
+    {
+      "name": "Drone Assist (NATS)",
+      "icon": "fas fa-map-marked-alt",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.nats.droneassist",
+      "iosUrl": "https://apps.apple.com/app/drone-assist-uk/id1174152316"
+    }
+  ]
+}

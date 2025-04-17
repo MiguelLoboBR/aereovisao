@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurações do Site - Aéreo Visão</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/institucional/public/css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo-container">
+        <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="admin-logo">
+      </div>
+      
+      <ul class="admin-nav">
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/index.html" class="admin-nav-link">
+            <i class="fas fa-tachometer-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/paginas/index.html" class="admin-nav-link">
+            <i class="fas fa-file-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Páginas</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/secoes/index.html" class="admin-nav-link">
+            <i class="fas fa-th-large admin-nav-icon"></i>
+            <span class="admin-nav-text">Seções</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/servicos/index.html" class="admin-nav-link">
+            <i class="fas fa-cogs admin-nav-icon"></i>
+            <span class="admin-nav-text">Serviços</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/galeria/index.html" class="admin-nav-link">
+            <i class="fas fa-images admin-nav-icon"></i>
+            <span class="admin-nav-text">Galeria</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/configuracoes/index.html" class="admin-nav-link active">
+            <i class="fas fa-cog admin-nav-icon"></i>
+            <span class="admin-nav-text">Configurações</span>
+          </a>
+        </li>
+      </ul>
+      
+      <a href="/site" class="admin-logout-link">
+        <i class="fas fa-arrow-left"></i> Voltar ao Site
+      </a>
+    </div>
+    
+    <!-- Conteúdo -->
+    <div class="admin-content">
+      <div class="admin-header">
+        <h1 class="admin-title">Configurações do Site</h1>
+        
+        <div class="admin-user">
+          <div class="admin-user-avatar">A</div>
+          <div class="admin-user-info">
+            <span class="admin-user-name">Administrador</span>
+            <span class="admin-user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tabs para configurações diferentes -->
+      <div class="admin-tabs">
+        <div class="admin-tab active" data-tab="geral">Configurações Gerais</div>
+        <div class="admin-tab" data-tab="contato">Informações de Contato</div>
+        <div class="admin-tab" data-tab="seo">SEO e Metadados</div>
+        <div class="admin-tab" data-tab="social">Redes Sociais</div>
+      </div>
+      
+      <!-- Formulário de configurações -->
+      <div class="admin-card">
+        <form id="admin-form" data-action="edit" data-resource="configuracoes">
+          <!-- Tab: Configurações Gerais -->
+          <div class="admin-tab-content active" data-tab-content="geral">
+            <div class="admin-form-group">
+              <label for="site_titulo" class="admin-form-label">Nome do Site</label>
+              <input type="text" id="site_titulo" name="site_titulo" class="admin-form-input" value="Aéreo Visão" required>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="site_descricao" class="admin-form-label">Descrição do Site</label>
+              <textarea id="site_descricao" name="site_descricao" class="admin-form-textarea" style="min-height: 80px;">Soluções profissionais de fotografia, filmagem e inspeção aérea com drones</textarea>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="logo" class="admin-form-label">Logo</label>
+              <div style="margin-bottom: 0.75rem;">
+                <img id="image-preview" src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Preview" style="max-height: 80px;" class="admin-image-preview">
+              </div>
+              <input type="file" id="image-upload" name="logo" accept="image/*" class="admin-form-input">
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Deixe em branco para manter a imagem atual</small>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="cor_primaria" class="admin-form-label">Cor Primária</label>
+              <input type="color" id="cor_primaria" name="cor_primaria" class="admin-form-input" value="#1e3a8a">
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Código HEX da cor principal do site</small>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="favicon" class="admin-form-label">Favicon</label>
+              <input type="file" id="favicon" name="favicon" accept="image/x-icon,image/png,image/gif" class="admin-form-input">
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Ícone exibido na aba do navegador (formato .ico, .png ou .gif)</small>
+            </div>
+          </div>
+          
+          <!-- Tab: Informações de Contato -->
+          <div class="admin-tab-content" data-tab-content="contato">
+            <div class="admin-form-group">
+              <label for="endereco" class="admin-form-label">Endereço</label>
+              <textarea id="endereco" name="endereco" class="admin-form-textarea" style="min-height: 80px;">São Paulo, SP - Brasil</textarea>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="telefone" class="admin-form-label">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" class="admin-form-input" value="(11) 99999-9999">
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="email" class="admin-form-label">E-mail</label>
+              <input type="email" id="email" name="email" class="admin-form-input" value="contato@aereovisao.com.br">
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="horario_funcionamento" class="admin-form-label">Horário de Funcionamento</label>
+              <input type="text" id="horario_funcionamento" name="horario_funcionamento" class="admin-form-input" value="Segunda a Sexta, 9h às 18h">
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="mapa_embed" class="admin-form-label">Código de Incorporação do Mapa</label>
+              <textarea id="mapa_embed" name="mapa_embed" class="admin-form-textarea" style="min-height: 120px;" placeholder="<iframe src='https://maps.google.com/...'></iframe>"></textarea>
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Código HTML fornecido pelo Google Maps, Bing Maps ou similar</small>
+            </div>
+          </div>
+          
+          <!-- Tab: SEO e Metadados -->
+          <div class="admin-tab-content" data-tab-content="seo">
+            <div class="admin-form-group">
+              <label for="meta_titulo" class="admin-form-label">Meta Título</label>
+              <input type="text" id="meta_titulo" name="meta_titulo" class="admin-form-input" value="Aéreo Visão - Serviços de Drone Profissional">
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Título exibido na aba do navegador e resultados de pesquisa (máx. 60 caracteres)</small>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="meta_descricao" class="admin-form-label">Meta Descrição</label>
+              <textarea id="meta_descricao" name="meta_descricao" class="admin-form-textarea" style="min-height: 80px;">Empresa especializada em fotografia, filmagem e inspeção aérea com drones para uso profissional. Atendemos todo o Brasil com altos padrões de qualidade.</textarea>
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Descrição exibida nos resultados de pesquisa (máx. 160 caracteres)</small>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="meta_keywords" class="admin-form-label">Meta Keywords</label>
+              <input type="text" id="meta_keywords" name="meta_keywords" class="admin-form-input" value="drone, fotografia aérea, filmagem aérea, inspeção, mapeamento, topografia">
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Palavras-chave separadas por vírgula</small>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="google_analytics" class="admin-form-label">Código do Google Analytics</label>
+              <textarea id="google_analytics" name="google_analytics" class="admin-form-textarea" style="min-height: 120px;" placeholder="<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src='https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID'></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>"></textarea>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="robots_txt" class="admin-form-label">Conteúdo do arquivo robots.txt</label>
+              <textarea id="robots_txt" name="robots_txt" class="admin-form-textarea" style="min-height: 120px;">User-agent: *
+Allow: /
+Disallow: /admin/</textarea>
+            </div>
+          </div>
+          
+          <!-- Tab: Redes Sociais -->
+          <div class="admin-tab-content" data-tab-content="social">
+            <div class="admin-form-group">
+              <label for="facebook" class="admin-form-label">Facebook</label>
+              <div class="admin-form-input-group" style="display: flex; align-items: center;">
+                <div style="flex-shrink: 0; width: 40px; text-align: center; color: #4267B2;">
+                  <i class="fab fa-facebook-f"></i>
+                </div>
+                <input type="url" id="facebook" name="facebook" class="admin-form-input" placeholder="https://facebook.com/aereovisao">
+              </div>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="instagram" class="admin-form-label">Instagram</label>
+              <div class="admin-form-input-group" style="display: flex; align-items: center;">
+                <div style="flex-shrink: 0; width: 40px; text-align: center; color: #E1306C;">
+                  <i class="fab fa-instagram"></i>
+                </div>
+                <input type="url" id="instagram" name="instagram" class="admin-form-input" placeholder="https://instagram.com/aereovisao">
+              </div>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="youtube" class="admin-form-label">YouTube</label>
+              <div class="admin-form-input-group" style="display: flex; align-items: center;">
+                <div style="flex-shrink: 0; width: 40px; text-align: center; color: #FF0000;">
+                  <i class="fab fa-youtube"></i>
+                </div>
+                <input type="url" id="youtube" name="youtube" class="admin-form-input" placeholder="https://youtube.com/aereovisao">
+              </div>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="linkedin" class="admin-form-label">LinkedIn</label>
+              <div class="admin-form-input-group" style="display: flex; align-items: center;">
+                <div style="flex-shrink: 0; width: 40px; text-align: center; color: #0077B5;">
+                  <i class="fab fa-linkedin-in"></i>
+                </div>
+                <input type="url" id="linkedin" name="linkedin" class="admin-form-input" placeholder="https://linkedin.com/company/aereovisao">
+              </div>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="twitter" class="admin-form-label">Twitter</label>
+              <div class="admin-form-input-group" style="display: flex; align-items: center;">
+                <div style="flex-shrink: 0; width: 40px; text-align: center; color: #1DA1F2;">
+                  <i class="fab fa-twitter"></i>
+                </div>
+                <input type="url" id="twitter" name="twitter" class="admin-form-input" placeholder="https://twitter.com/aereovisao">
+              </div>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="whatsapp" class="admin-form-label">WhatsApp</label>
+              <div class="admin-form-input-group" style="display: flex; align-items: center;">
+                <div style="flex-shrink: 0; width: 40px; text-align: center; color: #25D366;">
+                  <i class="fab fa-whatsapp"></i>
+                </div>
+                <input type="tel" id="whatsapp" name="whatsapp" class="admin-form-input" placeholder="5511999999999">
+              </div>
+              <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Formato: código do país + DDD + número, sem espaços ou caracteres especiais</small>
+            </div>
+            
+            <div class="admin-form-group">
+              <label for="compartilhamento_social" class="admin-form-label">Ativar botões de compartilhamento social</label>
+              <div style="margin-top: 0.5rem;">
+                <label class="admin-toggle">
+                  <input type="checkbox" id="compartilhamento_social" name="compartilhamento_social" checked>
+                  <span class="admin-toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botões do formulário -->
+          <div class="admin-btn-group" style="margin-top: 2rem;">
+            <button type="submit" class="admin-btn admin-btn-primary">
+              <i class="fas fa-save admin-btn-icon"></i> Salvar Configurações
+            </button>
+            <button type="reset" class="admin-btn admin-btn-secondary">
+              Restaurar Padrões
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="/institucional/public/js/admin.js"></script>
+  <script>
+    // Funções simplificadas sem dependência de autenticação
+    function getAdminData() {
+      return {
+        name: 'Administrador',
+        email: 'admin@aereovisao.com.br',
+        role: 'admin'
+      };
+    }
+    
+    function setupAdminEnvironment() {
+      console.log('Ambiente de configurações carregado com acesso direto');
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Ativar tabs
+      const tabs = document.querySelectorAll('.admin-tab');
+      const tabContents = document.querySelectorAll('.admin-tab-content');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remover classe active de todas as tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+          
+          // Adicionar classe active à tab clicada
+          tab.classList.add('active');
+          
+          // Exibir o conteúdo da tab correspondente
+          const tabContentId = tab.getAttribute('data-tab');
+          const tabContent = document.querySelector(`.admin-tab-content[data-tab-content="${tabContentId}"]`);
+          if (tabContent) {
+            tabContent.classList.add('active');
+          }
+        });
+      });
+      
+      // Lidar com o preview da imagem
+      const imageUpload = document.getElementById('image-upload');
+      const imagePreview = document.getElementById('image-preview');
+      
+      if (imageUpload && imagePreview) {
+        imageUpload.addEventListener('change', event => {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+              imagePreview.src = e.target.result;
+              imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      }
+      
+      // Estilizar o input de cor
+      const colorInput = document.getElementById('cor_primaria');
+      if (colorInput) {
+        colorInput.style.width = '50px';
+        colorInput.style.height = '40px';
+        colorInput.style.padding = '0';
+        colorInput.style.border = 'none';
+        colorInput.style.borderRadius = '4px';
+        colorInput.style.cursor = 'pointer';
+      }
+      
+      // Adicionar estilo para o toggle switch
+      const style = document.createElement('style');
+      style.textContent = `
+        .admin-toggle {
+          position: relative;
+          display: inline-block;
+          width: 60px;
+          height: 34px;
+        }
+        
+        .admin-toggle input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        
+        .admin-toggle-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+          border-radius: 34px;
+        }
+        
+        .admin-toggle-slider:before {
+          position: absolute;
+          content: "";
+          height: 26px;
+          width: 26px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+        }
+        
+        .admin-toggle input:checked + .admin-toggle-slider {
+          background-color: var(--primary);
+        }
+        
+        .admin-toggle input:focus + .admin-toggle-slider {
+          box-shadow: 0 0 1px var(--primary);
+        }
+        
+        .admin-toggle input:checked + .admin-toggle-slider:before {
+          transform: translateX(26px);
+        }
+        
+        .admin-tab-content {
+          display: none;
+        }
+        
+        .admin-tab-content.active {
+          display: block;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+</body>
+</html>

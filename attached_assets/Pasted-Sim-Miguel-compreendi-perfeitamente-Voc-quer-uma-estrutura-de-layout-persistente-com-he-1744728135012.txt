@@ -1,0 +1,53 @@
+Sim, Miguel, compreendi perfeitamente! 📌  
+Você quer uma **estrutura de layout persistente (com header e menu fixos)** que envolva todas as páginas internas após o login — e **não que cada página (como dashboard.tsx ou legislacao.tsx) tenha seu próprio layout**.
+
+---
+
+## ✅ Confirmação do que você quer (resumido):
+1. Após login, redirecionar para a **página `/app`**
+2. A página `/app` deve conter:
+   - Header com: nome do usuário logado, foto de perfil e botão de acesso ao perfil
+   - Sidebar (menu lateral)
+   - Um painel à direita que carrega **as rotas internas** como: Dashboard, Legislação, Perfil, Configurações
+3. As páginas `dashboard.tsx`, `legislacao.tsx`, etc. **devem carregar no painel da direita** (como children de `/app`)
+4. O **header e menu não devem sumir** quando mudar de rota
+5. Se necessário, pode recriar a página `dashboard.tsx` para **ficar só com o conteúdo**, sem layout extra
+
+---
+
+## ✅ Prompt ideal para colar no Replit (com React + TSX)
+
+> 💬 **Prompt para o Replit:**
+
+Quero refatorar meu sistema em React com TypeScript para que funcione da seguinte forma:
+
+- Após o login bem-sucedido, o usuário deve ser redirecionado para a rota `/app`
+- A rota `/app` deve conter o layout principal do sistema, incluindo:
+  - Um **header fixo** na parte superior que exibe:
+    - O nome do usuário logado (usando dados do contexto ou localStorage)
+    - Uma miniatura da **foto de perfil**
+    - Um link para a página `/perfil` (onde ele pode editar os próprios dados)
+  - Um **menu lateral (sidebar)** à esquerda, com botões para:
+    - Dashboard
+    - Legislação
+    - Perfil
+    - Sair
+
+- O conteúdo das páginas como `Dashboard.tsx`, `Legislacao.tsx` e `Perfil.tsx` deve ser carregado no painel da direita, **sem recarregar o layout ou perder o menu/header**.
+
+- As rotas internas devem funcionar dentro de `/app`, por exemplo:
+  - `/app/dashboard`
+  - `/app/legislacao`
+  - `/app/perfil`
+
+- Use `React Router DOM` para controlar as rotas internas com `<Outlet />`, garantindo que o layout principal (menu + header) seja mantido.
+
+- O componente `Dashboard.tsx` pode ser recriado se necessário, devendo conter apenas o conteúdo do painel, **sem menu próprio ou header duplicado**.
+
+- O sistema já usa Node.js e React com `.tsx`, mantenha essa estrutura.
+
+---
+
+Se quiser, posso já **gerar os arquivos prontos** com essa estrutura (`AppLayout.tsx`, `Header.tsx`, `Sidebar.tsx`, `AppRoutes.tsx`, etc.).
+
+Quer que eu prepare isso pra você?

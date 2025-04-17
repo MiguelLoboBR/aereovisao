@@ -1,0 +1,69 @@
+📌 CORREÇÃO DE REDIRECIONAMENTO DO LOGIN INSTITUCIONAL - MIGUEL LOBO
+
+⚠️ Problema:
+Ao clicar no botão de cadeado em /site, o redirecionamento ocorre incorretamente para /auth/login (portal principal),
+em vez de carregar a página institucional /institucional/admin/login.html e seguir com o fluxo correto.
+
+✅ Objetivo:
+Corrigir todo o fluxo do login do painel institucional, de modo que:
+- Clique no cadeado leve para /institucional/admin/login.html
+- Login redirecione para /institucional/admin/index.html
+- Não haja interferência do React Router
+- O sistema institucional use seu próprio fluxo de autenticação
+
+🛠️ Etapas para corrigir (já parcialmente feitas, mas deve-se garantir o seguinte):
+
+1. 📄 institucional/index.html
+   ✅ Botão de cadeado deve usar:
+   ```html
+   <a href="javascript:void(0)" onclick="window.location.href='/institucional/admin/login.html'">
+   ```
+
+2. 📄 institucional/admin/login.html
+   ✅ O formulário deve usar `onsubmit` e após sucesso redirecionar com:
+   ```js
+   window.location.href = window.location.origin + '/institucional/admin/index.html';
+   ```
+
+3. 📄 institucional/public/js/admin-auth.js
+   ✅ Atualizar todos os redirecionamentos pós-login e pós-logout para:
+   ```js
+   window.location.href = window.location.origin + '/institucional/admin/index.html';
+   ```
+
+4. 📄 server/institucional-auth.ts
+   ✅ Verificar se o endpoint POST /institucional/login está **isolado** do sistema principal
+   - Ele deve retornar sucesso apenas para painel institucional
+   - Em caso de redirecionamento server-side, usar:
+     ```ts
+     res.redirect('/institucional/admin/index.html');
+     ```
+
+5. 📄 client/src/App.tsx
+   ✅ Já possui esta verificação:
+   ```tsx
+   if (window.location.pathname.startsWith('/institucional')) return null;
+   ```
+   Isso impede que o React Router interfira. Manter isso.
+
+6. ✅ Banco de dados:
+   - Confirmado que usuários do institucional já têm credenciais separadas (ex: ia@aereovisao.com.br).
+   - O backend deve verificar no login se é institucional e responder corretamente.
+
+7. ❌ Atenção:
+   - O React ainda está interceptando o caminho `/institucional/...` em alguns casos.
+   - Pode haver conflito com o `react-router` no build final — verificar se há algum `<Route path="*">` pegando essas rotas.
+
+8. ✅ Ativar verificação de console:
+   - Veja na aba Console do navegador se está tentando redirecionar para `/auth`.
+   - Corrigir para que NUNCA acesse /auth ao entrar via institucional.
+
+🧪 Após corrigido, testar:
+- Acessar /site
+- Clicar no cadeado
+- Fazer login com usuário institucional
+- Acessar /institucional/admin/index.html
+- Logout e novo login devem permanecer no fluxo institucional
+
+📁 Repositório GitHub: MiguelLoboBR/aereovisao
+🌐 Hospedagem atual: Replit + Railway

@@ -1,0 +1,95 @@
+Perfeito! Abaixo está a **instrução técnica otimizada para o Replit (ou DreamFlow)** com foco em **atualizar a seção "Destaques Recentes"** do **Portal do Piloto**, para que ela **exiba automaticamente a última postagem de cada categoria** (`legislacao`, `firmware`, `dicas`).
+
+---
+
+## 🔧 Prompt Técnico – Destaques Recentes com Últimas Postagens por Categoria
+
+**Atualize a seção "Destaques Recentes" da tela inicial do projeto Portal do Piloto para exibir dinamicamente a última postagem publicada de cada uma das seguintes categorias:**
+
+- `legislacao`
+- `firmware`
+- `dicas`
+
+---
+
+### 📥 Requisitos de Backend
+
+Criar uma rota no servidor:
+```http
+GET /api/posts/destaques
+```
+
+🔁 Essa rota deve:
+- Consultar o banco de dados (Firebase ou SQLite)
+- Retornar **somente 1 postagem por categoria**
+- Ordem: mais recente (`ORDER BY created_at DESC LIMIT 1`) para cada categoria
+
+📦 Exemplo de resposta:
+```json
+[
+  {
+    "id": "abc123",
+    "titulo": "Nova legislação para voos noturnos",
+    "categoria": "legislacao",
+    "resumo": "DECEA publica novas normas para drones à noite.",
+    "imagem": "/uploads/voo-noite.png",
+    "data": "2025-04-14"
+  },
+  {
+    "id": "def456",
+    "titulo": "DJI lança firmware v01.12.0140",
+    "categoria": "firmware",
+    "resumo": "Atualização traz melhorias importantes na estabilidade de voo.",
+    "imagem": "/uploads/dji-fw.png",
+    "data": "2025-04-13"
+  },
+  {
+    "id": "ghi789",
+    "titulo": "Checklist rápido para iniciantes",
+    "categoria": "dicas",
+    "resumo": "Evite erros comuns com esse guia simples.",
+    "imagem": "/uploads/checklist.png",
+    "data": "2025-04-12"
+  }
+]
+```
+
+---
+
+### 📤 Frontend (React)
+
+Na Home (`Home.jsx`), ao carregar a tela:
+
+```jsx
+useEffect(() => {
+  fetch("/api/posts/destaques")
+    .then((res) => res.json())
+    .then(setDestaques);
+}, []);
+```
+
+Renderizar com cards personalizados:
+
+```jsx
+{destaques.map(post => (
+  <div key={post.id} className="rounded shadow p-4 bg-white mb-4">
+    <img src={post.imagem} alt={post.titulo} className="w-full h-40 object-cover rounded mb-2" />
+    <span className="text-xs text-gray-500 uppercase">{post.categoria}</span>
+    <h3 className="text-lg font-bold">{post.titulo}</h3>
+    <p className="text-sm text-gray-700">{post.resumo}</p>
+    <a href={`/post/${post.id}`} className="text-blue-600 mt-2 inline-block">Ver mais</a>
+  </div>
+))}
+```
+
+---
+
+### 🛡️ Considerações
+
+- A consulta deve ser limitada a **1 post por categoria ativa**
+- A imagem pode ser opcional (fallback visual se não houver)
+- Ordem visual: Legislação, Firmware, Dicas
+
+---
+
+Se quiser, posso te entregar o código da rota `/api/posts/destaques` + o componente React `Destaques.jsx` prontos para colar. Deseja isso?

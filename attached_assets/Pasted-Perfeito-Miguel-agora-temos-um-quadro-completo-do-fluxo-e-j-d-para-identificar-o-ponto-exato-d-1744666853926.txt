@@ -1,0 +1,105 @@
+Perfeito, Miguel — agora temos um quadro completo do fluxo, e já dá para identificar o ponto exato do erro.
+
+---
+
+## 📌 Situação atual do seu sistema Node:
+
+1. A página inicial (`/`) carrega normalmente ✅  
+2. O botão “Criar Conta” redireciona para: `/auth?tab=register` ✅  
+3. O botão “Entrar” redireciona para: `/auth?tab=login` ✅  
+4. Ambas as ações **caem na mesma view (tela única)**, com renderização condicional ✅  
+5. No login, ao enviar e-mail/senha, retorna:  
+   ❌ **401: credenciais inválidas**
+
+---
+
+## 🎯 Objetivo: corrigir o erro 401 e garantir que o login funcione corretamente
+
+### ✅ **Passo 1: Verificar o backend (`POST /auth/login`)**
+
+Esse endpoint precisa:
+1. Receber `email` e `senha`
+2. Buscar o usuário no banco (PostgreSQL, MySQL, etc.)
+3. Comparar a senha usando `bcrypt.compare`
+4. Retornar sucesso (200 + token ou session) ou erro (401)
+
+### 💥 Causas comuns para o erro 401:
+
+| Possível causa | Correção sugerida |
+|----------------|--------------------|
+| E-mail não encontrado | Verifique se o e-mail existe no banco de dados |
+| Senha não bate | Verifique se o `bcrypt.compare()` está corretamente implementado |
+| Corpo da requisição vazio | Verifique se o `express.json()` está ativado no seu `server.js` |
+| Login quebrado pelo frontend | Certifique-se que está enviando `Content-Type: application/json` e usando `POST` corretamente |
+
+---
+
+### ✅ **Passo 2: Exemplo de rota backend correta (Express + bcrypt)**
+
+```js
+app.post('/auth/login', async (req, res) => {
+  const { email, senha } = req.body;
+
+  if (!email || !senha) {
+    return res.status(400).json({ erro: 'Campos obrigatórios' });
+  }
+
+  const usuario = await db.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+
+  if (usuario.rowCount === 0) {
+    return res.status(401).json({ erro: 'Credenciais inválidas' });
+  }
+
+  const hash = usuario.rows[0].senha;
+  const senhaCorreta = await bcrypt.compare(senha, hash);
+
+  if (!senhaCorreta) {
+    return res.status(401).json({ erro: 'Credenciais inválidas' });
+  }
+
+  // Sucesso
+  return res.status(200).json({ mensagem: 'Login OK', usuario: usuario.rows[0] });
+});
+```
+
+---
+
+### ✅ **Passo 3: Exemplo de chamada correta no frontend (`login.js`)**
+
+```js
+const dados = {
+  email: document.getElementById('email').value,
+  senha: document.getElementById('senha').value
+};
+
+fetch('/auth/login', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(dados)
+})
+.then(res => {
+  if (!res.ok) throw new Error('Falha no login');
+  return res.json();
+})
+.then(data => {
+  console.log('Login OK:', data);
+  localStorage.setItem('usuario', JSON.stringify(data.usuario));
+  window.location.href = '/app.html';
+})
+.catch(err => {
+  alert('Erro: credenciais inválidas');
+});
+```
+
+---
+
+### 🧪 Quer que eu:
+
+- Verifique seu `POST /auth/login` e a estrutura do banco?
+- Faça um exemplo funcional completo para substituir no seu projeto?
+
+Se quiser, me manda:
+- O trecho da rota `/auth/login`
+- O trecho do `fetch()` ou formulário do login
+
+Assim te devolvo exatamente a correção pontual para resolver esse 401.

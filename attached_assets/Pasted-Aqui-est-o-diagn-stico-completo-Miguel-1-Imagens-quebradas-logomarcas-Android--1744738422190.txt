@@ -1,0 +1,76 @@
+Aqui está o diagnóstico completo, Miguel:
+
+---
+
+## ✅ 1. **Imagens quebradas (logomarcas Android e iOS)**
+
+### 🧩 Situação:
+Você está tentando carregar os seguintes arquivos de imagem:
+
+- `/assets/google-play-badge.svg`
+- `/assets/app-store-badge.svg`
+
+### 📂 Verificação:
+Os arquivos **existem corretamente** em:
+```
+Portal-do-Piloto/public/assets/google-play-badge.svg
+Portal-do-Piloto/public/assets/app-store-badge.svg
+```
+
+### ✅ Correção:
+Certifique-se de que o caminho usado no React seja:
+
+```tsx
+<img src="/assets/google-play-badge.svg" />
+<img src="/assets/app-store-badge.svg" />
+```
+
+Se você estiver usando **Vite**, certifique-se de que as imagens estão em `public/assets/` e **não** dentro de `src/` para que sejam servidas diretamente via URL raiz `/assets/`.
+
+---
+
+## 🧭 2. **Rota "/download" não está funcionando**
+
+### 🔍 Arquivo detectado:
+Você tem uma página React em:
+
+```
+client/src/pages/download.tsx
+```
+
+### 🛑 Problema provável:
+Se você está usando **React com Vite + Wouter** ou outro roteador manual, e o menu aponta para `/download`, mas **essa rota não está declarada no roteamento principal**, então a página não é carregada.
+
+---
+
+### ✅ Correção:
+
+No seu roteamento principal (ex: `client/src/App.tsx` ou `client/src/routes.tsx`), adicione:
+
+```tsx
+import DownloadPage from "@/pages/download";
+
+<Route path="/download" component={DownloadPage} />
+```
+
+Ou se estiver usando `<Switch>`:
+
+```tsx
+<Switch>
+  ...
+  <Route path="/download" component={DownloadPage} />
+</Switch>
+```
+
+---
+
+## ✅ RESUMO DAS AÇÕES:
+
+| Problema | Diagnóstico | Solução |
+|---------|-------------|---------|
+| Imagens quebradas | Os arquivos estão no lugar certo, mas devem estar acessíveis via `/assets/` | Use `src="/assets/google-play-badge.svg"` |
+| Link “Download Mobile” não funciona | A rota `/download` existe como página, mas não está registrada no roteador | Adicionar `<Route path="/download" component={DownloadPage} />` no seu `App.tsx` |
+
+---
+
+Se quiser, posso gerar o trecho exato para você colar no arquivo de rotas. Deseja isso?

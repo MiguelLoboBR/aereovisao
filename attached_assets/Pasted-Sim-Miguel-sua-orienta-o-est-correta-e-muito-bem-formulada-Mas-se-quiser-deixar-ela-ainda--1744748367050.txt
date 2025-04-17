@@ -1,0 +1,70 @@
+Sim, Miguel — sua orientação está **correta e muito bem formulada**. Mas se quiser deixar ela ainda **mais clara e técnica para o time de desenvolvimento**, aqui vai uma versão **melhorada** que você pode copiar e usar:
+
+---
+
+## 🛠️ Verificação de Problemas com Novas Funcionalidades
+
+**Contexto:** Após implementar campos como `youtubeUrl`, `conteudo` com ReactQuill e anexos, estou enfrentando erros como:
+
+- ❌ `Invalid token`  
+- ❌ `Failed to fetch`  
+
+Esses erros sugerem dois possíveis problemas:
+
+---
+
+### ✅ **1. Verificar se os campos existem no banco de dados**
+
+> Confirmar se os seguintes campos estão **criados e mapeados corretamente** no schema/tabela de postagens:
+
+- `youtubeUrl` (string)
+- `conteudo` (formato texto/html — tipo `TEXT` ou equivalente)
+- `imagem` (URL da imagem destacada)
+- `anexo` (URL para arquivo, ex: PDF)
+
+🔎 Verificar no banco (PostgreSQL ou Firebase, conforme usado):
+
+```sql
+-- Exemplo para PostgreSQL
+SELECT * FROM posts LIMIT 1;
+-- Conferir se os novos campos aparecem com dados
+```
+
+---
+
+### ✅ **2. Confirmar se os dados estão sendo salvos corretamente**
+
+> Verificar no backend:
+- Se a API de `POST /api/posts` está realmente recebendo os campos novos
+- Se não está ignorando ou bloqueando via schema (ex: Zod ou Prisma)
+- Se está retornando um `JSON válido` na resposta
+
+⚠️ Obs: `Failed to fetch` pode indicar:
+- Erro CORS
+- Timeout do backend
+- Rota inexistente ou bloqueada por autenticação
+- Erro 500 não tratado
+
+---
+
+### ✅ **3. Validar autenticação**
+
+> Se aparecer `Invalid token`, verificar:
+
+- O token JWT está sendo enviado nos headers (`Authorization: Bearer ...`)
+- A sessão expirou ou está malformada
+- O endpoint está protegido por middleware que está rejeitando o usuário
+
+---
+
+## ✅ Conclusão
+
+📌 **Orientação clara para equipe técnica:**
+
+> Verificar se o banco de dados possui os novos campos (`youtubeUrl`, `conteudo`, `imagem`, `anexo`) e se os dados estão sendo corretamente salvos e recuperados.  
+> Confirmar se o backend retorna JSON válido e que o token de autenticação está sendo aceito.  
+> Isso é essencial para o conteúdo aparecer corretamente nas páginas de listagem e visualização do post.
+
+---
+
+Se quiser, posso montar comandos SQL de verificação ou testes de API com `curl`/`fetch`. Deseja?

@@ -1,0 +1,36 @@
+A estrutura da pasta `institucional/admin` está bem definida e contém os seguintes arquivos principais:
+
+- `index.html` – página principal do painel administrativo do site institucional
+- `login.html` – página de login do painel administrativo
+- `register.html` – página de cadastro de usuário do painel institucional
+- `configuracoes/index.html` – tela de configurações
+- `galeria/index.html` e `galeria/upload.html` – gerenciamento de galeria de fotos
+- `servicos/criar.html`, `editar.html`, `index.html` – gerenciamento de serviços oferecidos
+
+### Problema relatado:
+> Ao clicar no cadeado, está indo para a `Auth` do portal (cliente), mas deveria ir para o `login.html` do painel institucional.
+
+### O que você deve pedir para a IA do Replit ajustar:
+
+```txt
+🔧 Tarefa para Replit:
+
+1. No site institucional (pasta `/institucional`), revise o botão de cadeado/menu de acesso administrativo:
+   - Atualmente ele redireciona para `/auth` (login do portal do piloto).
+   - Corrija o link para que vá para: `/institucional/admin/login.html`.
+
+2. Verifique se a rota `/institucional/admin/login.html` está acessível via navegador. Se não estiver:
+   - Adicione a rota no servidor Express para servir corretamente os arquivos estáticos do diretório `institucional`.
+   - Exemplo:
+     ```js
+     app.use('/institucional', express.static(path.join(__dirname, '../institucional')));
+     ```
+
+3. Certifique-se de que as páginas `login.html` e `register.html` do institucional estão usando banco de dados separado, ou ao menos possuem uma verificação de tipo de acesso distinta dos usuários do portal.
+
+4. (Opcional) Se necessário, crie um banco ou tabela exclusiva para o painel institucional (ex: `admin_users`).
+
+Resultado esperado: Ao clicar no ícone de cadeado no site institucional, o usuário deve ser direcionado corretamente para a tela de login do painel administrativo do institucional, e não para a `auth` do sistema principal.
+```
+
+Se desejar, posso gerar esse conteúdo em um `.txt` para você colar direto no Replit. Deseja?

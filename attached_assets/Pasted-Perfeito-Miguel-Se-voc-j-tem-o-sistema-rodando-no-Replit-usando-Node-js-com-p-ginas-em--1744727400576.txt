@@ -1,0 +1,127 @@
+Perfeito, Miguel! Se você **já tem o sistema rodando no Replit**, usando **Node.js com páginas em `.tsx` (React + TypeScript)**, então vamos adaptar o que você quer para esse cenário.
+
+---
+
+## ✅ Seu objetivo agora:
+- **Manter o layout fixo** com menu à esquerda
+- **Ao logar, cair direto numa tela com:**
+  - Sidebar esquerda (menu fixo)
+  - Painel direito com conteúdo inicial (`Dashboard`)
+- **Clicando em “Perfil”, “Configurações” etc., trocar apenas o painel da direita**, mantendo menu visível
+- Organizar as páginas como **rotas internas** (SPA estilo admin)
+
+---
+
+## 🧠 Solução ideal com React + TSX
+
+Você deve estar usando algo como **Wouter, React Router DOM ou navegação manual**, então o ideal é criar uma estrutura parecida com esta:
+
+---
+
+### 📁 Estrutura de pastas:
+
+```
+src/
+├── components/
+│   ├── Sidebar.tsx
+│   ├── Header.tsx (opcional)
+├── pages/
+│   ├── Dashboard.tsx
+│   ├── Perfil.tsx
+│   ├── Configuracoes.tsx
+├── App.tsx
+├── main.tsx
+```
+
+---
+
+### ✅ `App.tsx`
+
+```tsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Dashboard from './pages/Dashboard';
+import Perfil from './pages/Perfil';
+import Configuracoes from './pages/Configuracoes';
+
+export default function App() {
+  return (
+    <Router>
+      <div style={{ display: 'flex', height: '100vh' }}>
+        <Sidebar />
+        <div style={{ flex: 1, padding: '20px' }}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/config" element={<Configuracoes />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
+}
+```
+
+---
+
+### ✅ `Sidebar.tsx`
+
+```tsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+export default function Sidebar() {
+  return (
+    <div style={{ width: '250px', background: '#f4f4f4', padding: '20px' }}>
+      <h3>Portal do Piloto</h3>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
+        <li><Link to="/dashboard">Dashboard</Link></li>
+        <li><Link to="/perfil">Perfil</Link></li>
+        <li><Link to="/config">Configurações</Link></li>
+        <li><a href="/logout">Sair</a></li>
+      </ul>
+    </div>
+  );
+}
+```
+
+---
+
+### ✅ Exemplo de página `Dashboard.tsx`
+
+```tsx
+import React from 'react';
+
+export default function Dashboard() {
+  return <h2>Bem-vindo ao painel do colaborador</h2>;
+}
+```
+
+---
+
+### 📦 Requisitos:
+- Certifique-se de ter instalado:
+```bash
+npm install react-router-dom
+```
+
+- E se estiver usando TypeScript:
+```bash
+npm install --save-dev @types/react-router-dom
+```
+
+---
+
+## 🧩 Resultado:
+- Após login, o sistema carrega `/dashboard`
+- Menu fixo na lateral
+- O conteúdo à direita muda conforme a rota
+- Tudo sem `iframe` e sem recarregar a página
+
+---
+
+Se quiser, posso ajustar isso com base no seu projeto real (já existente no Replit) — só me manda o trecho atual do seu `App.tsx` e da navegação para adaptar direto.
+
+Quer isso agora?

@@ -1,0 +1,16 @@
+Unexpected Application Error!
+Unexpected token 'd', "dicas,noticia" is not valid JSON
+SyntaxError: Unexpected token 'd', "dicas,noticia" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/src/pages/admin/IAConfigClean.tsx:65:82
+    at commitHookEffectListMount (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:16915:34)
+    at commitPassiveMountOnFiber (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:18156:19)
+    at commitPassiveMountEffects_complete (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:18129:17)
+    at commitPassiveMountEffects_begin (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:18119:15)
+    at commitPassiveMountEffects (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:18109:11)
+    at flushPassiveEffectsImpl (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:19490:11)
+    at flushPassiveEffects (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:19447:22)
+    at commitRootImpl (https://638e416f-1ac9-4a64-a3c4-34beb53c4461-00-10we1phtahrjx.worf.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=fa90b4a2:19416:13)
+💿 Hey developer 👋
+
+You can provide a way better UX than this when your app throws errors by providing your own ErrorBoundary or errorElement prop on your route.

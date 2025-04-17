@@ -1,0 +1,85 @@
+
+📄 ESCOP0 FINAL PARA A IA DO REPLIT – Site Institucional Aéreo Visão
+
+🎯 OBJETIVO
+Criar um site institucional moderno, responsivo e visualmente alinhado com a marca Aéreo Visão, integrando:
+
+- Conteúdo institucional estático e dinâmico
+- Painel administrativo exclusivo para o institucional
+- Consumo de posts do sistema principal (Portal do Piloto)
+- Integração com usuários existentes (sem duplicar cadastro)
+
+🎨 IDENTIDADE VISUAL
+- Paleta: branco, azul automotivo e cinza
+- Logotipo: drone com hélices + AÉREO VISÃO + slogan “A visão que encanta”
+- Fonte: Inter ou Roboto
+- Design: leve, responsivo, elegante
+
+🧱 ESTRUTURA DO SITE
+
+1. Cabeçalho
+- Logotipo à esquerda
+- Menu: Início | Sobre | Serviços | Portfólio | Contato
+
+2. Hero Section
+- Imagem de drone profissional em ação
+- Título: "Imagens Aéreas Profissionais — Da Cobertura ao Detalhe"
+
+3. Sobre
+A Aéreo Visão é especializada em captação de imagens aéreas com drones de alta performance, entregando soluções visuais para eventos, empresas, construções, imóveis e muito mais. Utilizamos equipamentos de ponta com registro ANAC/DECEA para máxima segurança e qualidade.
+
+4. Serviços
+- Cobertura de Eventos com Drone
+- Vistorias Técnicas e Monitoramento Aéreo
+- Filmagens Imobiliárias com Tour 360º
+- Piloto Profissional credenciado
+
+5. Chamada para o Portal do Piloto
+Chamada incluída na home:
+Você é piloto de drone?
+Acesse o Portal do Piloto: um sistema completo com dicas, legislação, firmware e conteúdo colaborativo para operadores de drones.
+🔗 /portaldopiloto
+
+6. Galeria (Portfólio)
+- Grade com imagens e vídeos
+- Controlada por painel administrativo separado
+- Cada item pode ter título, descrição, foto ou link de vídeo
+
+7. Últimas Notícias (via sistema Portal do Piloto)
+Na home, exibir a última postagem de cada categoria:
+- Dicas
+- Legislação
+- Firmware
+- Notícias
+Usar endpoint:
+GET /api/public/posts/destaques
+
+8. Formulário de Contato Avançado
+Campos:
+- Nome
+- E-mail
+- Telefone
+- Tipo de serviço (dropdown): Evento, Imóvel, Vistoria Técnica, Outro
+- Mensagem
+Envio para: contato@aereovisao.com.br
++ WhatsApp: +55 24 99877-0463
++ Instagram: @aereovisao
+
+9. Rodapé
+- Contatos, redes sociais, links institucionais
+
+🔐 PAINEL ADMINISTRATIVO DO INSTITUCIONAL
+- URL: /admin-site
+- Painel separado do sistema
+- Gerencia: textos institucionais, galeria de imagens e vídeos
+- Autenticação compartilhada com o sistema principal
+  (Reutilizar usuários e roles: admin e colaborador)
+
+📡 ARQUITETURA
+/server         → Backend (já existente)
+/client         → Sistema principal (React)
+/institucional  → Novo frontend do site (pode ser React)
+/admin-site     → Painel administrativo institucional
+
+🔁 Observação final:
+Evitar duplicação de usuários. Utilizar a mesma tabela e sistema de login do backend já existente.

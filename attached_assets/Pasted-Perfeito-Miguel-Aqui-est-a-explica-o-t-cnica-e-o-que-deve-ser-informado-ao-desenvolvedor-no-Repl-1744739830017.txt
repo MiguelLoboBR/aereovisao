@@ -1,0 +1,63 @@
+Perfeito, Miguel. Aqui está a explicação técnica e o que deve ser informado ao desenvolvedor no Replit:
+
+---
+
+## 🛠️ ✅ 1. Sobre o erro “Unexpected token ‘<’…” ao salvar dados da doação
+
+### 🧩 Causa:
+Esse erro normalmente acontece quando o frontend está esperando receber um **JSON válido**, mas em vez disso o servidor está retornando **uma página HTML** (como `404 Not Found` ou `500 Internal Server Error`), começando com `<!DOCTYPE html>`.
+
+### ✅ Como explicar para o Replit:
+
+> 💬 **"A rota de salvar os dados da doação está retornando um HTML em vez de JSON, gerando o erro: 'Unexpected token <'. Verificar se a API chamada no formulário realmente existe no backend, e se ela está retornando JSON válido com `res.json()`. Confirmar também se o método da requisição está correto (POST/PUT) e a URL correta está sendo usada."**
+
+---
+
+## 🧭 ✅ 2. Sobre o comportamento da página `/download`
+
+### 🧩 Situação:
+Você relatou que o link `/download` **abre como uma nova página completa**, recarregando todo o layout e **perdendo o contexto do administrador logado** e o layout persistente com sidebar.
+
+### ✅ Causa:
+A página `download.tsx` provavelmente **não está incluída no sistema de rotas interno (SPA)**, sendo chamada diretamente pelo navegador como uma nova rota — por isso recarrega tudo.
+
+### ✅ Como explicar para o Replit:
+
+> 💬 **"A página `/download` está funcionando, mas está sendo carregada fora do contexto do app (SPA), o que faz com que a sidebar desapareça e o layout de admin seja perdido. Corrigir adicionando essa rota no `App.tsx` ou arquivo principal de rotas do sistema, para que seja renderizada via React Router e não como uma navegação completa."**
+
+#### Exemplo técnico:
+
+No `App.tsx` ou `routes.tsx` (dependendo da estrutura usada):
+
+```tsx
+import DownloadPage from "@/pages/download";
+
+<Route path="/download" component={DownloadPage} />
+```
+
+E no menu lateral, garantir que o link use o componente `<Link>` do roteador:
+
+```tsx
+<Link href="/download">Versão Mobile</Link>
+```
+
+Em vez de:
+
+```html
+<a href="/download">Versão Mobile</a> <!-- isso recarrega a página -->
+```
+
+---
+
+## ✅ O que pode ser solicitado ao time de dev (Replit)
+
+**Resumo claro para enviar:**
+
+> Por favor, verifiquem:
+> 1. A API que salva as informações da doação está retornando HTML em vez de JSON, causando erro de parsing no frontend.
+> 2. A página `/download` precisa ser carregada internamente pelo sistema React Router, para manter o layout e sessão do usuário (sem recarregar o app completo).
+> 3. Garantir que o menu lateral utilize `<Link href="/download">` em vez de `<a href>` para manter a navegação do SPA.
+
+---
+
+Se quiser, posso abrir agora o conteúdo do `download.tsx` e já adaptá-lo para seguir o padrão das outras páginas. Deseja isso?

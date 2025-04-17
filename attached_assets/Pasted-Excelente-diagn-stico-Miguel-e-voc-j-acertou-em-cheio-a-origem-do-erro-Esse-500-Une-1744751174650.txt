@@ -1,0 +1,93 @@
+Excelente diagnóstico, Miguel — e você já acertou **em cheio a origem do erro**!  
+Esse `❌ 500: Unexpected end of form` está ocorrendo justamente porque:
+
+---
+
+## 🧨 **Erro: Descompasso entre frontend e backend no nome dos campos de upload**
+
+### 📌 Situação atual:
+
+| Frontend (`FormData.append`) | Backend (`multer.single`)    | Resultado         |
+|------------------------------|-------------------------------|-------------------|
+| `'imagemDestacada'`          | `postImageUpload.single('imageFile')`  | ❌ Incompatível |
+| `'anexo'`                    | `attachmentUpload.single('attachmentFile')` | ❌ Incompatível |
+
+---
+
+## ✅ Solução ideal (recomendada)
+
+### 🎯 Atualizar o backend para usar:
+
+```ts
+upload.fields([
+  { name: 'imagemDestacada', maxCount: 1 },
+  { name: 'anexo', maxCount: 1 }
+])
+```
+
+Assim você **alinha 100% com o que o frontend já está usando**, evita confusões com múltiplos `.single()` e permite receber **ambos os arquivos em um único `FormData`** (o que é exatamente o que você quer no Replit).
+
+---
+
+## 🔧 Código sugerido para corrigir backend (posts.ts):
+
+Substitua:
+
+```ts
+postImageUpload.single('imageFile'),
+attachmentUpload.single('attachmentFile'),
+```
+
+Por:
+
+```ts
+import multer from "multer";
+
+const upload = multer({ storage: diskStorage });
+
+upload.fields([
+  { name: 'imagemDestacada', maxCount: 1 },
+  { name: 'anexo', maxCount: 1 }
+]),
+```
+
+---
+
+### 👇 E para ler os arquivos:
+
+```ts
+const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+
+if (files?.imagemDestacada?.[0]) {
+  imagemUrl = getFileUrl(files.imagemDestacada[0].filename);
+}
+if (files?.anexo?.[0]) {
+  anexoUrl = getFileUrl(files.anexo[0].filename);
+  anexoNome = files.anexo[0].originalname;
+}
+```
+
+---
+
+## 🧠 Por que não é melhor mudar o frontend?
+
+Porque:
+
+- O backend **espera múltiplos arquivos**, mas `.single()` **interrompe o fluxo** se dois forem enviados.
+- `FormData` só pode ser enviado uma vez — logo, o frontend **não pode fazer dois envios separados para a mesma requisição.**
+- O backend precisa ser **mais flexível**, não o frontend.
+
+---
+
+### ✅ Conclusão
+
+🔧 **Corrija o backend para aceitar `.fields()` com os mesmos nomes do frontend:**
+
+```ts
+imagemDestacada → imagemDestacada  
+anexo → anexo
+```
+
+E o erro `Unexpected end of form` será resolvido.
+
+Se quiser, posso te mandar o trecho `.ts` exato para colar no backend. Deseja?

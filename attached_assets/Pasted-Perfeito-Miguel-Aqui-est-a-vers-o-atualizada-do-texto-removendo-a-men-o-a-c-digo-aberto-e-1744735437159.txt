@@ -1,0 +1,91 @@
+Perfeito, Miguel! Aqui está a **versão atualizada do texto**, removendo a menção a “código aberto” e substituindo por um modelo de **sistema colaborativo** com papel de **usuário colaborador**. O foco agora é mostrar que o portal é mantido com apoio da comunidade — mas com controle e curadoria — reforçando a ideia de que qualquer piloto pode ajudar a enriquecer o conteúdo.
+
+---
+
+## 🆕 Texto Atualizado para Tela Inicial – Portal do Piloto
+
+---
+
+### 🔷 Cabeçalho / Apresentação
+
+**Aéreo Visão**  
+**Portal do Piloto**
+
+🎯 *Seu copiloto digital para voar com segurança, confiança e informação.*
+
+> **Entre** ou **crie sua conta** e tenha acesso imediato a um mundo de recursos essenciais para quem pilota drones – seja por hobby ou profissão.
+
+---
+
+### 🟦 Bloco de Introdução
+
+### **Bem-vindo ao Portal do Piloto**
+O seu centro de comando para tudo que envolve drones no Brasil.  
+📡 Aqui você encontra **regulamentações atualizadas**, **firmwares oficiais**, **dicas práticas**, além de conteúdos exclusivos criados por e para pilotos como você.
+
+---
+
+### 🛠 Recursos Rápidos
+
+#### 📘 **Legislação**
+Tudo que você precisa saber sobre regras e normas da ANAC, DECEA, IBAMA e outros órgãos oficiais.
+
+#### 🔧 **Firmware**
+Downloads e changelogs organizados por modelo – DJI, FIMI, Autel e mais. Evite voar desatualizado.
+
+#### 💡 **Dicas e Tutoriais**
+Aprenda com os melhores. Acesso a conteúdos práticos, checklist de voo, boas práticas e vídeos.
+
+---
+
+### 🧭 **Sobre o Portal do Piloto**
+
+#### ✅ Benefícios de usar o portal:
+
+- 📍 **Tudo em um só lugar**: Regras, atualizações, novidades e conteúdo técnico
+- 🚀 **Atualizações em tempo real**: Firmware e legislações sempre atualizadas
+- 🤝 **Rede colaborativa**: Usuários com perfil de colaborador podem publicar dicas e notícias
+- 📲 **Compatível com todos os dispositivos**: Funciona como app (PWA) no celular, tablet ou navegador
+
+---
+
+### 🧑‍🤝‍🧑 **Sistema Colaborativo**
+
+O Portal do Piloto é um ambiente que valoriza a troca de experiências e o crescimento coletivo.  
+👥 Usuários com permissão de **colaborador** podem publicar conteúdos úteis como:
+
+- Dicas de operação
+- Alertas de firmware
+- Novidades sobre legislação
+- Tutoriais práticos
+
+Cada publicação passa por curadoria para garantir a qualidade e utilidade para toda a comunidade.
+
+> Quer contribuir? Crie sua conta e peça acesso como colaborador!
+
+---
+
+### 💛 **Apoie com uma doação**
+O Portal do Piloto é gratuito, mas mantido com o apoio da comunidade. Sua contribuição nos ajuda a:
+
+- Manter os servidores e atualizações online
+- Criar novos recursos e módulos
+- Garantir que o conteúdo continue confiável e acessível
+
+**[ 🙌 Faça uma doação ]**
+
+---
+
+### ⭐️ **Destaques Recentes**
+
+#### 🆕 Nova legislação para voos noturnos
+> O DECEA publicou novas regras para drones em áreas urbanas durante a noite.  
+🔗 [Ler mais]
+
+#### 🔄 DJI lança firmware v01.12.0140
+> Correções importantes e melhorias na estabilidade de voo para diversos modelos.  
+🔗 [Ver detalhes]
+
+---
+
+Se quiser, posso agora converter esse conteúdo direto para React (JSX) com responsividade e animações suaves. Deseja isso?

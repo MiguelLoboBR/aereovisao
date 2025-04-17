@@ -1,0 +1,78 @@
+Ótima análise, Miguel — e o motivo de **você não conseguir alterar o nível de outro usuário** está aqui:
+
+---
+
+### ❌ Causa direta:
+
+No seu componente `UserItem`, o `<select>` está sendo desabilitado se `isSelf === true`:
+
+```tsx
+<select
+  ...
+  disabled={isLoading || isSelf}
+>
+```
+
+E o `isSelf` está definido como:
+
+```tsx
+const isSelf = user.id === currentUserId;
+```
+
+✅ Isso está correto **para evitar que o administrador mude o próprio papel**, **mas parece que o `currentUserId` está igual ao `user.id` até para o Miguel Souza**, o que **não deveria acontecer**.
+
+---
+
+### ✅ Solução em 2 passos
+
+#### 🔧 1. **Confirme se `user.id` e `currentUserId` estão corretos**
+- O `currentUserId` deve vir do hook `useAuthJWT()`, ou seja, do usuário logado.
+- O `user.id` vem da lista de usuários carregados.
+- **Se ambos estiverem vindo com o mesmo valor**, é erro no `useAuthJWT()` ou no backend.
+
+---
+
+#### 🔧 2. **Código alternativo com checagem explícita**
+
+Para evitar confusão, pode ajustar o `isSelf` para isso:
+
+```tsx
+const isSelf = String(user.email).toLowerCase() === String(currentUser?.email).toLowerCase();
+```
+
+Ou até mais seguro:
+
+```tsx
+const isSelf = user.id === currentUser?.id;
+```
+
+---
+
+### 🛠️ Como deve ficar o trecho do `<select>` corrigido:
+
+```tsx
+<select
+  value={selectedRole}
+  onChange={handleRoleChange}
+  disabled={isLoading || isSelf}
+  className={`p-2 border rounded-md w-full text-sm ${
+    isSelf 
+      ? 'bg-aero-slate-100 cursor-not-allowed opacity-70' 
+      : 'bg-white'
+  }`}
+>
+```
+
+✅ E certifique-se de que o `currentUserId` seja passado corretamente para o componente `UserItem`.
+
+---
+
+### ✅ Resumo para a IA do Replit:
+
+> Corrigir a lógica que define `isSelf` no componente `UserItem` em `AdminUsuarios.tsx`.  
+> Atualmente, o sistema está tratando todos os usuários como se fossem o próprio usuário logado, o que impede a alteração de nível.  
+> O correto é comparar `user.id` com o `currentUser?.id` real retornado pelo `useAuthJWT()`.
+
+---
+
+Se quiser, posso gerar o novo `AdminUsuarios.tsx` corrigido pra você colar direto. Deseja?

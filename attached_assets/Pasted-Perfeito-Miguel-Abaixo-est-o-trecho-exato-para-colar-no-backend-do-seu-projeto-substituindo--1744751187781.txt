@@ -1,0 +1,78 @@
+Perfeito, Miguel! Abaixo está o **trecho exato para colar no backend** do seu projeto, substituindo o uso dos dois `.single()` por `.fields()` — 100% compatível com o frontend atual que usa `imagemDestacada` e `anexo` nos `FormData`.
+
+---
+
+### ✅ Trecho corrigido para o backend (`server/posts.ts` ou rota equivalente)
+
+```ts
+import multer from "multer";
+import { diskStorage } from "@/utils/upload"; // ajuste conforme seu caminho real
+
+const upload = multer({ storage: diskStorage }); // ou use seu diskStorage personalizado
+
+// Middleware que aceita ambos os arquivos: imagem destacada e anexo
+const postUploads = upload.fields([
+  { name: "imagemDestacada", maxCount: 1 },
+  { name: "anexo", maxCount: 1 }
+]);
+
+// Dentro da rota POST de criação de post:
+app.post("/api/posts", authMiddleware, colaboradorMiddleware, postUploads, async (req, res) => {
+  try {
+    const files = req.files as {
+      [fieldname: string]: Express.Multer.File[];
+    };
+
+    let imagemUrl = "";
+    let anexoUrl = "";
+    let anexoNome = "";
+
+    if (files?.imagemDestacada?.[0]) {
+      imagemUrl = getFileUrl(files.imagemDestacada[0].filename);
+    }
+
+    if (files?.anexo?.[0]) {
+      anexoUrl = getFileUrl(files.anexo[0].filename);
+      anexoNome = files.anexo[0].originalname;
+    }
+
+    // Agora prossiga para salvar no banco:
+    const { titulo, conteudo, youtubeUrl, categoria } = req.body;
+    const autorId = req.user.id;
+
+    const novoPost = await db.post.create({
+      data: {
+        titulo,
+        conteudo,
+        youtubeUrl,
+        categoria,
+        imagem: imagemUrl,
+        anexo: anexoUrl,
+        anexoNome,
+        authorId: autorId,
+      },
+    });
+
+    // Notificação por e-mail, se habilitada
+    await notifyAllUsersAboutNewPost(novoPost);
+
+    return res.status(201).json({ message: "Post criado com sucesso!" });
+  } catch (error) {
+    console.error("Erro ao criar post:", error);
+    return res.status(500).send("Erro ao processar o formulário.");
+  }
+});
+```
+
+---
+
+### 📌 Pontos importantes:
+- Não esqueça de importar `diskStorage` e o `notifyAllUsersAboutNewPost()` conforme seu projeto já usa.
+- Os campos do `FormData` devem ter os nomes exatamente iguais: `imagemDestacada` e `anexo`.
+- Essa abordagem elimina os erros:
+  - `Unexpected field`
+  - `Unexpected end of form`
+
+---
+
+Se quiser, posso empacotar tudo isso em um arquivo `.ts` pronto para colar na sua pasta `routes` ou `server`. Deseja isso também?

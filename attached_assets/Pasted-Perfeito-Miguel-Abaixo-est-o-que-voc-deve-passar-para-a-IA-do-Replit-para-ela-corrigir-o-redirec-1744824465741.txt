@@ -1,0 +1,62 @@
+Perfeito, Miguel! Abaixo está o que você deve passar para a IA do Replit para ela corrigir o redirecionamento e configurar corretamente o painel institucional com login próprio:
+
+---
+
+**🧠 Instruções completas para a IA Replit**
+
+### ✅ Objetivo:
+Corrigir o comportamento do botão de cadeado (🔒) no site institucional, para que ele acesse corretamente a rota `/institucional/admin/login.html` e, após o login, permaneça no painel administrativo do **institucional**, sem redirecionar para o painel do sistema principal (`/auth`).
+
+---
+
+### 🔄 Situação Atual:
+- O botão leva para `/institucional/admin/login.html`, mas **após o login, o sistema redireciona para `/auth`** incorretamente.
+- O painel institucional já existe e funciona.
+- As rotas públicas e privadas do institucional estão dentro da pasta `/institucional/`.
+- O sistema principal tem seu próprio painel em `/auth`.
+
+---
+
+### 🎯 O que precisa ser feito:
+1. **Corrigir o redirecionamento no login do institucional**:
+   - Ao fazer login em `/institucional/admin/login.html`, o redirecionamento deve ir para `/institucional/admin/index.html`.
+   - **Não pode redirecionar para `/auth`**.
+
+2. **Verificar os arquivos responsáveis por isso:**
+   - Provavelmente o erro está em algum `login.js`, `auth.js`, ou `login.html` do institucional reutilizando função global que redireciona para `/auth`.
+   - Deve existir um `fetch('/auth')` ou `location.href = '/auth'` que precisa ser **especificado para a rota correta do institucional**:
+     ```js
+     window.location.href = "/institucional/admin/index.html";
+     ```
+
+3. **Compartilhar base de usuários**:
+   - Ambas as áreas (institucional e sistema principal) usam a **mesma tabela de usuários**, com níveis de acesso distintos.
+   - O painel institucional só precisa autenticar o usuário com função de administrador e verificar o acesso com base em `role === 'admin'`.
+
+4. **Evitar conflitos**:
+   - Toda lógica de login e autenticação da pasta `/institucional/` deve ser **totalmente independente** do sistema `/client/`.
+   - Se necessário, mover funções para um `auth_institucional.js`.
+
+---
+
+### 📁 Estrutura relevante:
+```
+/institucional/
+  └── admin/
+      ├── login.html
+      ├── index.html
+      └── js/
+          └── login.js
+```
+
+---
+
+### ✅ Esperado após correção:
+- 🔒 O botão de login abre `/institucional/admin/login.html`.
+- O login funciona normalmente.
+- Após logar, o usuário é redirecionado para `/institucional/admin/index.html`.
+- O painel institucional não interfere no painel do sistema principal.
+
+---
+
+Se quiser, posso também gerar esse texto em `.txt` para você colar direto no Replit. Deseja isso?

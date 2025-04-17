@@ -1,0 +1,109 @@
+Perfeito, Miguel. Aqui está a versão **corrigida e finalizada** da mensagem que você pode enviar para a **IA do Replit** ou seu desenvolvedor, considerando que a **página de configuração da IA deve continuar protegida por login**, **somente acessível por administradores**, **sem sidebar** e com todos os ajustes que você solicitou:
+
+---
+
+## ✅ TAREFA COMPLETA PARA CONFIGURAÇÃO E CORREÇÃO DO PAINEL DE IA
+
+---
+
+### 1. ❌ **Corrigir erro ao carregar as configurações da IA**
+
+- Ao acessar a aba **“Config. IA”**, aparece o erro:
+  > **"Não foi possível carregar as configurações da IA"**
+
+🔎 **O que verificar:**
+- Se existe a rota `GET /api/config/ia`
+- Se ela retorna um objeto JSON válido como abaixo:
+
+```json
+{
+  "model": "gpt-4",
+  "temperature": 0.7,
+  "frequency_days": 7,
+  "topics": "drones, legislação, firmware, novidades",
+  "instructions": "Crie um artigo informativo sobre drones para o portal Aéreo Visão."
+}
+```
+
+- Se a função no frontend usa `await res.json()` corretamente
+- Se a chamada está autenticada com token JWT de um usuário com `role = "admin"`
+
+---
+
+### 2. ✅ **Manter proteção via autenticação de administrador**
+
+🔐 O painel de **Configuração da IA deve ser acessível apenas por usuários com `role = "admin"`**.
+
+**Não usar rota pública.**  
+Essa página deve estar dentro da estrutura autenticada, **mas com layout visual limpo**, ou seja:
+
+### 3. ❌ **Remover o menu lateral (Sidebar) somente dessa página**
+
+🎯 Mesmo sendo uma rota autenticada, o visual da página de **configuração da IA** deve ser **sem sidebar ou menus**, como um painel separado.
+
+📌 Sugestão de implementação:
+
+- Criar uma rota como `/admin/config-ia`
+- Verificar `role === "admin"` antes de carregar o conteúdo
+- Renderizar com `LayoutLimpo` ou `PageWrapper` sem o componente `<Sidebar />`
+
+---
+
+### 4. ❌ **Usuário da IA não aparece na listagem do painel de usuários**
+
+O usuário `ia@aereovisao.com.br` com `role: colaborador` **deveria aparecer no painel administrativo de gerenciamento de usuários**, mas está oculto.
+
+Verificar se:
+- A listagem está filtrando por algum campo `isHuman` ou `showInUI`
+- Ele está ativo no banco (`ativo: true`)
+- Não está sendo filtrado apenas por e-mails "normais"
+
+---
+
+### 5. 🧪 **Permitir testar localmente sem erro de chave da API**
+
+- O campo “Chave da API (OpenAI)” pode ser opcional no ambiente de teste
+- Exibir aviso “A chave da API está vazia” no painel se estiver em branco
+- Não bloquear o restante da tela caso ela não esteja preenchida
+
+---
+
+### 6. 🧠 **Onde obter a chave da API da OpenAI**
+
+Para uso real da IA, será necessário cadastrar a chave da OpenAI:
+
+1. Acessar: https://platform.openai.com/account/api-keys
+2. Clicar em **“Create new secret key”**
+3. Copiar o código gerado (formato: `sk-...`)
+4. Colar na aba **Config. IA** no painel administrativo
+
+---
+
+### 7. 🔧 Banco de dados (se PostgreSQL ou Firebase)
+
+Certificar que a tabela ou coleção `config_ia` contenha os seguintes campos:
+
+```json
+{
+  model: string,
+  temperature: number,
+  frequency_days: number,
+  topics: string,
+  instructions: string,
+  openai_api_key?: string
+}
+```
+
+---
+
+### ✅ Objetivo final
+
+- Tela de configuração da IA totalmente funcional
+- Apenas acessível a administradores autenticados
+- Visual limpo, sem menu lateral
+- Permitir salvar e editar configurações
+- IA visível na lista de usuários com role colaborador
+
+---
+
+Se quiser, posso gerar um mock completo da tela com layout limpo em `.tsx`, ou código do backend com `GET` e `PUT /api/config/ia` padronizado. Deseja?

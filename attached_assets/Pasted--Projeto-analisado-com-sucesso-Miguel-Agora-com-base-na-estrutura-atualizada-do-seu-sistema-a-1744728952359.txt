@@ -1,0 +1,90 @@
+✅ Projeto analisado com sucesso, Miguel!
+
+Agora com base na estrutura atualizada do seu sistema, aqui vai a versão revisada do **prompt técnico para o Replit ou DreamFlow**, incluindo:
+
+1. Painel de postagens inteligente (como você solicitou)
+2. Controle de acesso por nível (admin/colaborador)
+3. Função especial para a IA "ChatGPT"
+4. **Limpeza da estrutura** removendo arquivos e páginas de testes ou que não estão sendo usados
+
+---
+
+## 🔧 Prompt Técnico – Revisado (Painel + Estrutura Limpa)
+
+**Crie ou atualize o sistema Aéreo Visão – Portal do Piloto, adicionando um painel administrativo para postagens categorizadas e removendo arquivos e páginas de testes que não estão em uso.**
+
+---
+
+### ✅ Estrutura Atualizada (projeto usa React + Vite + Tailwind + Node.js)
+
+#### ➕ NOVO MÓDULO: Painel de Postagens
+
+- Rota protegida: `/admin/post`
+- Visível apenas para usuários com `role: admin` ou `colaborador`
+- Campos:
+  - Título
+  - Categoria (`dicas`, `firmware`, `legislacao`, `noticia`)
+  - Conteúdo (markdown ou rich text)
+  - Autor (padrão: usuário logado)
+  - Data de publicação (gerado automaticamente)
+- Armazenamento: Firebase Firestore ou SQLite (seguir estrutura atual)
+
+---
+
+### 🔁 Redirecionamento por Categoria
+
+Após a publicação:
+- Se `categoria === "dicas"` → exibir automaticamente em `/dicas`
+- Se `categoria === "firmware"` → exibir em `/firmware`
+- Se `categoria === "legislacao"` → exibir em `/legislacao`
+- Se `categoria === "noticia"` → exibir em `/` ou `/noticias`
+
+A listagem será feita dinamicamente com base na categoria consultada na API:  
+`GET /api/posts?categoria=firmware`
+
+---
+
+### 🧠 Usuário "ChatGPT" como Colaborador
+
+- Criar um usuário com `username: "ChatGPT"` e `role: "colaborador"`
+- Esse usuário poderá usar um endpoint autorizado para **postar automaticamente** via:
+  ```
+  POST /api/posts
+  Headers: { Authorization: Bearer [token] }
+  Body: { titulo, categoria, conteudo, autor: "ChatGPT" }
+  ```
+
+- Usar esse recurso para gerar conteúdos automáticos sobre atualizações, firmwares e leis
+
+---
+
+### 🧹 Limpeza de Estrutura
+
+**Remover:**
+- Páginas de exemplo/teste que não estão em uso
+- Componentes de mock não utilizados
+- Pastas vazias ou sobras do ambiente de build que não são necessárias
+- Quaisquer arquivos duplicados, imagens de teste ou rotas não conectadas
+
+**Manter apenas:**
+- `/client/src/pages` com as páginas reais (Home, Dicas, Firmware, Legislação etc)
+- `/server/routes` com API REST real
+- Firebase (se integrado), Tailwind, configs do Vite
+
+---
+
+### 📝 Observação final
+
+O projeto deve continuar limpo, modular, rápido, seguro e funcional como PWA.  
+Toda publicação deve ser categorizada e exibida na rota correspondente automaticamente.  
+O painel do admin deve ser visualmente refinado e responsivo, com controle de permissão e notificações de sucesso/erro.
+
+---
+
+Se quiser, posso:
+- Gerar o painel `AdminPost.jsx`
+- Criar o endpoint `/api/posts`
+- Atualizar a listagem das páginas conforme categoria
+- Sugerir exatamente quais arquivos você pode apagar agora
+
+Deseja que eu prossiga com isso?

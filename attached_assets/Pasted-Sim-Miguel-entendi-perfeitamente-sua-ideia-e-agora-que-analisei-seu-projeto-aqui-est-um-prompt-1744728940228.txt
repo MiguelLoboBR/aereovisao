@@ -1,0 +1,101 @@
+Sim, Miguel, entendi perfeitamente sua ideia e agora que analisei seu projeto, aqui está um **prompt técnico completo para o Replit ou DreamFlow**, com tudo que você precisa para adicionar um **Painel de Postagens inteligente** e seguro, com categorias direcionadas e integração com a IA colaboradora (ChatGPT):
+
+---
+
+## 🔧 Prompt Técnico — Painel de Postagens Inteligente para o Portal do Piloto
+
+**Adicione ao projeto "Aéreo Visão – Portal do Piloto" um painel administrativo para publicação de conteúdos categorizados.**
+
+---
+
+### 🎯 Objetivo:
+Criar um **painel de postagem acessível apenas por usuários com nível `admin` ou `colaborador`**, onde é possível:
+- Cadastrar novas postagens
+- Escolher a categoria da postagem: `dicas`, `firmware`, `legislacao`, `noticia`, etc.
+- Armazenar as postagens em banco (Firebase Firestore ou SQLite, conforme estrutura)
+- Redirecionar automaticamente para a **página correspondente**, com base na categoria
+
+---
+
+### 📂 Estrutura Recomendada
+
+**Novo módulo:**
+
+```
+/client
+  └── /pages
+       └── AdminPost.jsx       → painel de criação de postagens
+```
+
+**Backend:**
+
+```
+/server
+  └── /routes
+       └── posts.js            → API REST para enviar/consultar postagens
+```
+
+---
+
+### 🔑 Regras de Acesso
+
+- Apenas usuários com `role: "admin"` ou `role: "colaborador"` podem acessar a rota `/admin/post`.
+- O robô **IA ChatGPT** será cadastrado como um `colaborador`, com permissões de leitura e escrita via endpoint.
+
+---
+
+### 🧠 Lógica de Redirecionamento
+
+- Cada postagem contém:
+  ```json
+  {
+    "titulo": "Nova Atualização Mini 4 Pro",
+    "categoria": "firmware",
+    "conteudo": "...",
+    "autor": "ChatGPT",
+    "data": "2025-04-15"
+  }
+  ```
+
+- No frontend, ao renderizar as postagens:
+  - Se `categoria === "firmware"` → exibir na página `/firmware`
+  - Se `categoria === "dicas"` → exibir na página `/dicas`
+  - Se `categoria === "legislacao"` → exibir na página `/legislacao`
+  - Se `categoria === "noticia"` → exibir na página inicial ou em `/noticias`
+
+---
+
+### ⚙️ Backend (Requisitos)
+
+- Criar API REST:
+  - `POST /api/postagens` → adicionar postagem
+  - `GET /api/postagens?categoria=firmware` → consultar por categoria
+- Middleware de autenticação baseado em `token` ou role definida localmente
+- Se usuário for `"ChatGPT"` com permissão `"colaborador"`, permitir publicação automática
+
+---
+
+### 🤖 Integração com IA (ChatGPT)
+
+- A IA será considerada um usuário com permissão `colaborador`
+- Ao consultar um tema como “firmware Mini 3”, a IA pode:
+  - Buscar conteúdo relevante
+  - Gerar resumo técnico
+  - Enviar via API `POST /api/postagens` com token de acesso
+
+---
+
+### ✅ Extras
+
+- Exibir aviso: “Conteúdo gerado automaticamente pela IA colaboradora” (se autor for "ChatGPT")
+- Separar postagens por aba ou seção nas páginas visíveis ao público
+- Toda nova postagem deve atualizar dinamicamente sem recarregar a página
+
+---
+
+Se quiser, posso gerar:
+1. O `AdminPost.jsx` com formulário de envio
+2. A rota `/api/postagens` com permissões e validação
+3. O componente de listagem inteligente por categoria
+
+Deseja que eu inicie a criação dos arquivos agora ou prefere testar no Replit com esse prompt?
