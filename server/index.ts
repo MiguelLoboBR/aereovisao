@@ -72,12 +72,12 @@ app.use((req, res, next) => {
 
     // ✅ Redirecionar "/" para o site institucional (versão final para produção)
 app.get("/", (req, res) => {
-  const institucionalIndexPath = path.join(__dirname, "../dist/institucional/index.html");
-  console.log("Servindo página institucional raiz:", institucionalIndexPath);
-  res.sendFile(institucionalIndexPath);
+// aqui process.cwd() é a raiz onde está dist/
+const institucionalIndexPath = path.join(process.cwd(), "dist", "institucional", "index.html");
+console.log("Servindo página institucional raiz:", institucionalIndexPath);
+res.sendFile(institucionalIndexPath);
 });
-
-
+    
     // Servir arquivos do frontend (modo produção)
     serveStatic(app);
   }
