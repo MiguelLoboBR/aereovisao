@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Serviço - Aéreo Visão</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- TinyMCE para editor WYSIWYG -->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/institucional/public/css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo-container">
+        <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="admin-logo">
+      </div>
+      
+      <ul class="admin-nav">
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/index.html" class="admin-nav-link">
+            <i class="fas fa-tachometer-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/paginas/index.html" class="admin-nav-link">
+            <i class="fas fa-file-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Páginas</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/secoes/index.html" class="admin-nav-link">
+            <i class="fas fa-th-large admin-nav-icon"></i>
+            <span class="admin-nav-text">Seções</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/servicos/index.html" class="admin-nav-link active">
+            <i class="fas fa-cogs admin-nav-icon"></i>
+            <span class="admin-nav-text">Serviços</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/galeria/index.html" class="admin-nav-link">
+            <i class="fas fa-images admin-nav-icon"></i>
+            <span class="admin-nav-text">Galeria</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/configuracoes/index.html" class="admin-nav-link">
+            <i class="fas fa-cog admin-nav-icon"></i>
+            <span class="admin-nav-text">Configurações</span>
+          </a>
+        </li>
+      </ul>
+      
+      <a href="/site" class="admin-logout-link">
+        <i class="fas fa-sign-out-alt"></i> Voltar ao Site
+      </a>
+    </div>
+    
+    <!-- Conteúdo -->
+    <div class="admin-content">
+      <div class="admin-header">
+        <h1 class="admin-title">Criar Novo Serviço</h1>
+        
+        <div class="admin-user">
+          <div class="admin-user-avatar">A</div>
+          <div class="admin-user-info">
+            <span class="admin-user-name">Administrador</span>
+            <span class="admin-user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Breadcrumbs -->
+      <div style="margin-bottom: 1.5rem;">
+        <a href="/institucional/admin/servicos/index.html" class="admin-btn admin-btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.9rem;">
+          <i class="fas fa-arrow-left admin-btn-icon"></i> Voltar para lista
+        </a>
+      </div>
+      
+      <!-- Formulário de criação -->
+      <div class="admin-card">
+        <form id="admin-form" data-action="create" data-resource="servico">
+          <!-- Informações básicas -->
+          <div class="admin-form-group">
+            <label for="titulo" class="admin-form-label">Título</label>
+            <input type="text" id="titulo" name="titulo" class="admin-form-input" required>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="slug" class="admin-form-label">Slug URL (ex: fotografia-aerea)</label>
+            <input type="text" id="slug" name="slug" class="admin-form-input" required>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="descricao" class="admin-form-label">Descrição curta</label>
+            <textarea id="descricao" name="descricao" class="admin-form-textarea" style="min-height: 80px;" required></textarea>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="status" class="admin-form-label">Status</label>
+            <select id="status" name="status" class="admin-form-select">
+              <option value="publicado">Publicado</option>
+              <option value="rascunho">Rascunho</option>
+            </select>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="icone" class="admin-form-label">Ícone (classe Font Awesome)</label>
+            <input type="text" id="icone" name="icone" class="admin-form-input" placeholder="fas fa-camera">
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="ordem" class="admin-form-label">Ordem de exibição</label>
+            <input type="number" id="ordem" name="ordem" class="admin-form-input" value="1" min="1">
+          </div>
+          
+          <div class="admin-section-divider"></div>
+          
+          <!-- Conteúdo da página -->
+          <h2 style="font-size: 1.25rem; margin-bottom: 1rem;">Conteúdo da Página</h2>
+          
+          <div class="admin-form-group">
+            <label for="imagem_principal" class="admin-form-label">Imagem Principal</label>
+            <div style="margin-bottom: 0.75rem;">
+              <img id="image-preview" src="" alt="Preview" style="max-width: 100%; max-height: 200px; display: none;" class="admin-image-preview">
+            </div>
+            <input type="file" id="image-upload" name="imagem_principal" accept="image/*" class="admin-form-input">
+            <small style="display: block; margin-top: 0.5rem; color: #6b7280;">Recomendado: 1200 x 600 pixels</small>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="titulo_pagina" class="admin-form-label">Título da Página</label>
+            <input type="text" id="titulo_pagina" name="titulo_pagina" class="admin-form-input">
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="subtitulo_pagina" class="admin-form-label">Subtítulo da Página</label>
+            <input type="text" id="subtitulo_pagina" name="subtitulo_pagina" class="admin-form-input">
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="conteudo" class="admin-form-label">Conteúdo</label>
+            <textarea id="conteudo" name="conteudo" class="admin-form-textarea" data-wysiwyg="true" style="height: 400px;"></textarea>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="diferenciais" class="admin-form-label">Diferenciais (um por linha, iniciando com "fas fa-check-circle:")</label>
+            <textarea id="diferenciais" name="diferenciais" class="admin-form-textarea" style="min-height: 150px;" placeholder="fas fa-check-circle: Equipe especializada
+fas fa-check-circle: Equipamentos de última geração
+fas fa-check-circle: Atendimento personalizado"></textarea>
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="meta_titulo" class="admin-form-label">Meta título (SEO)</label>
+            <input type="text" id="meta_titulo" name="meta_titulo" class="admin-form-input">
+          </div>
+          
+          <div class="admin-form-group">
+            <label for="meta_descricao" class="admin-form-label">Meta descrição (SEO)</label>
+            <textarea id="meta_descricao" name="meta_descricao" class="admin-form-textarea" style="min-height: 80px;"></textarea>
+          </div>
+          
+          <!-- Botões do formulário -->
+          <div class="admin-btn-group" style="margin-top: 2rem;">
+            <button type="submit" class="admin-btn admin-btn-primary">
+              <i class="fas fa-save admin-btn-icon"></i> Salvar
+            </button>
+            <a href="/institucional/admin/servicos/index.html" class="admin-btn admin-btn-secondary">
+              Cancelar
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="/institucional/public/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializa o editor TinyMCE
+      if (typeof tinymce !== 'undefined') {
+        tinymce.init({
+          selector: 'textarea[data-wysiwyg="true"]',
+          height: 500,
+          plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'help', 'wordcount'
+          ],
+          toolbar: 'undo redo | blocks | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+          content_style: 'body { font-family: Inter, sans-serif; font-size: 14px; }',
+          branding: false
+        });
+      }
+      
+      // Auto-gerar slug a partir do título
+      const tituloInput = document.getElementById('titulo');
+      const slugInput = document.getElementById('slug');
+      
+      if (tituloInput && slugInput) {
+        tituloInput.addEventListener('blur', function() {
+          if (!slugInput.value) {
+            // Se o slug estiver vazio, gere-o a partir do título
+            const slug = this.value
+              .toLowerCase()
+              .replace(/[^\w\s-]/g, '')  // Remover caracteres especiais
+              .replace(/\s+/g, '-')      // Substituir espaços por hífens
+              .replace(/--+/g, '-')      // Substituir múltiplos hífens por um único
+              .trim();
+              
+            slugInput.value = slug;
+          }
+        });
+      }
+      
+      // Preencher título da página a partir do título
+      const tituloPaginaInput = document.getElementById('titulo_pagina');
+      
+      if (tituloInput && tituloPaginaInput) {
+        tituloInput.addEventListener('blur', function() {
+          if (!tituloPaginaInput.value) {
+            tituloPaginaInput.value = this.value;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

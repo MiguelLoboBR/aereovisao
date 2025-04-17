@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="70" viewBox="0 0 300 70">
+  <g fill="#FFFFFF">
+    <path d="M20.5,10 C25.5,10 30,14.5 30,19.5 C30,24.5 25.5,29 20.5,29 C15.5,29 11,24.5 11,19.5 C11,14.5 15.5,10 20.5,10 Z M20.5,13 C17,13 14,16 14,19.5 C14,23 17,26 20.5,26 C24,26 27,23 27,19.5 C27,16 24,13 20.5,13 Z"/>
+    <path d="M40,15 L43,15 L43,45 L40,45 L40,15 Z"/>
+    <path d="M50,15 L53,15 L63,40 L60,40 L50,15 Z"/>
+    <path d="M70,15 L73,15 L73,45 L70,45 L70,15 Z"/>
+    <path d="M83,15 L100,15 L100,18 L83,18 L83,15 Z"/>
+    <path d="M83,28 L98,28 L98,31 L83,31 L83,28 Z"/>
+    <path d="M83,42 L100,42 L100,45 L83,45 L83,42 Z"/>
+    <path d="M110,15 L113,15 L123,40 L120,40 L110,15 Z"/>
+    
+    <!-- Texto "AÉREO VISÃO" -->
+    <text x="150" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold">AÉREO VISÃO</text>
+    
+    <!-- Texto "A visão que encanta" -->
+    <text x="150" y="55" font-family="Arial, sans-serif" font-size="14" font-style="italic">A visão que encanta</text>
+    
+    <!-- Representação das hélices do drone -->
+    <circle cx="20.5" cy="10" r="2"/>
+    <circle cx="20.5" cy="29" r="2"/>
+    <circle cx="10" cy="19.5" r="2"/>
+    <circle cx="31" cy="19.5" r="2"/>
+  </g>
+</svg>

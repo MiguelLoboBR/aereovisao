@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aéreo Visão - Acesso Direto</title>
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f5f7fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    header {
+      background-color: #1a4f85;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .link-section {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      color: #1a4f85;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+    }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .link-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      background-color: #f9f9f9;
+    }
+    .link-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+    .link-card h3 {
+      margin-top: 0;
+      color: #1a4f85;
+    }
+    .link-card p {
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .btn {
+      display: inline-block;
+      background-color: #1a4f85;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #14385d;
+    }
+    .btn-secondary {
+      background-color: #6c757d;
+    }
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    } 
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Aéreo Visão - Central de Acesso</h1>
+      <p>Links diretos para todas as áreas do sistema</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="link-section">
+      <h2>Site Institucional</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <h3>Site Institucional</h3>
+          <p>Página principal do site institucional da Aéreo Visão.</p>
+          <a href="/institucional/index.html" class="btn" target="_blank">Acessar Site</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Painel Admin (Login)</h3>
+          <p>Painel administrativo com autenticação.</p>
+          <a href="/institucional/admin/login.html" class="btn" target="_blank">Acessar Painel</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Painel Admin Direto</h3>
+          <p>Acesso direto ao painel administrativo sem autenticação.</p>
+          <a href="/institucional/admin-direto/index.html" class="btn" target="_blank">Acesso Direto</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="link-section">
+      <h2>Portal do Piloto</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <h3>Portal do Piloto</h3>
+          <p>Acesso ao Portal do Piloto - aplicação principal.</p>
+          <a href="/" class="btn" target="_blank">Acessar Portal</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Área do Administrador</h3>
+          <p>Painel administrativo do Portal do Piloto (requer login).</p>
+          <a href="/app/dashboard" class="btn btn-secondary" target="_blank">Acessar Painel</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="link-section">
+      <h2>Admin Institucional - Acesso Direto a Seções</h2>
+      <div class="link-grid">
+        <div class="link-card">
+          <h3>Dashboard</h3>
+          <p>Painel inicial com visão geral.</p>
+          <a href="/institucional/admin-direto/index.html" class="btn" target="_blank">Acessar</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Gerenciar Páginas</h3>
+          <p>Edite as páginas do site institucional.</p>
+          <a href="/institucional/admin-direto/paginas/index.html" class="btn" target="_blank">Acessar</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Gerenciar Seções</h3>
+          <p>Edite as seções de conteúdo do site.</p>
+          <a href="/institucional/admin-direto/secoes/index.html" class="btn" target="_blank">Acessar</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Gerenciar Serviços</h3>
+          <p>Edite os serviços exibidos no site.</p>
+          <a href="/institucional/admin-direto/servicos/index.html" class="btn" target="_blank">Acessar</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Gerenciar Galeria</h3>
+          <p>Edite as imagens da galeria.</p>
+          <a href="/institucional/admin-direto/galeria/index.html" class="btn" target="_blank">Acessar</a>
+        </div>
+        
+        <div class="link-card">
+          <h3>Configurações</h3>
+          <p>Configurações gerais do site institucional.</p>
+          <a href="/institucional/admin-direto/configuracoes/index.html" class="btn" target="_blank">Acessar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Aéreo Visão. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>

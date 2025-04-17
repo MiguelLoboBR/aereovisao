@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - Aéreo Visão</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/institucional/public/css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo-container">
+        <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="admin-logo">
+      </div>
+      
+      <ul class="admin-nav">
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/index.html" class="admin-nav-link active">
+            <i class="fas fa-tachometer-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/paginas/index.html" class="admin-nav-link">
+            <i class="fas fa-file-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Páginas</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/secoes/index.html" class="admin-nav-link">
+            <i class="fas fa-th-large admin-nav-icon"></i>
+            <span class="admin-nav-text">Seções</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/servicos/index.html" class="admin-nav-link">
+            <i class="fas fa-cogs admin-nav-icon"></i>
+            <span class="admin-nav-text">Serviços</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/galeria/index.html" class="admin-nav-link">
+            <i class="fas fa-images admin-nav-icon"></i>
+            <span class="admin-nav-text">Galeria</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin-direto/configuracoes/index.html" class="admin-nav-link">
+            <i class="fas fa-cog admin-nav-icon"></i>
+            <span class="admin-nav-text">Configurações</span>
+          </a>
+        </li>
+      </ul>
+      
+      <a href="#" onclick="goToSite(event)" class="admin-logout-link">
+        <i class="fas fa-arrow-left"></i> Voltar ao Site
+      </a>
+      <a href="#" class="admin-logout admin-logout-link" style="margin-top: 10px; color: #e74c3c;">
+        <i class="fas fa-sign-out-alt"></i> Sair do Painel
+      </a>
+    </div>
+    
+    <!-- Conteúdo -->
+    <div class="admin-content">
+      <div class="admin-header">
+        <h1 class="admin-title">Dashboard</h1>
+        
+        <div class="admin-user">
+          <div class="admin-user-avatar">A</div>
+          <div class="admin-user-info">
+            <span class="admin-user-name">Administrador</span>
+            <span class="admin-user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Estatísticas -->
+      <div class="admin-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon admin-stat-icon-primary">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="admin-stat-content">
+            <h2 class="admin-stat-value">6</h2>
+            <p class="admin-stat-label">Páginas</p>
+          </div>
+        </div>
+        
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon admin-stat-icon-success">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <div class="admin-stat-content">
+            <h2 class="admin-stat-value">6</h2>
+            <p class="admin-stat-label">Serviços</p>
+          </div>
+        </div>
+        
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon admin-stat-icon-warning">
+            <i class="fas fa-images"></i>
+          </div>
+          <div class="admin-stat-content">
+            <h2 class="admin-stat-value">15</h2>
+            <p class="admin-stat-label">Imagens na Galeria</p>
+          </div>
+        </div>
+        
+        <div class="admin-stat-card">
+          <div class="admin-stat-icon admin-stat-icon-danger">
+            <i class="fas fa-th-large"></i>
+          </div>
+          <div class="admin-stat-content">
+            <h2 class="admin-stat-value">8</h2>
+            <p class="admin-stat-label">Seções</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Atividade recente -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Atividade Recente</h2>
+        </div>
+        
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ação</th>
+              <th>Usuário</th>
+              <th>Item</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="admin-badge admin-badge-success">Criação</span>
+              </td>
+              <td>Administrador</td>
+              <td>Página Treinamento de Pilotos</td>
+              <td>16/04/2025 12:30</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="admin-badge admin-badge-warning">Edição</span>
+              </td>
+              <td>Administrador</td>
+              <td>Página Mapeamento e Topografia</td>
+              <td>16/04/2025 12:15</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="admin-badge admin-badge-success">Criação</span>
+              </td>
+              <td>Administrador</td>
+              <td>Página Inspeções de Construção</td>
+              <td>16/04/2025 12:00</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="admin-badge admin-badge-info">Visualização</span>
+              </td>
+              <td>Administrador</td>
+              <td>Configurações do Site</td>
+              <td>16/04/2025 11:45</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="admin-badge admin-badge-warning">Edição</span>
+              </td>
+              <td>Administrador</td>
+              <td>Página Inicial</td>
+              <td>16/04/2025 11:30</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="admin-grid-2">
+        <!-- Serviços populares -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Serviços Populares</h2>
+          </div>
+          
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Serviço</th>
+                <th>Visualizações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fotografia Aérea</td>
+                <td>328</td>
+              </tr>
+              <tr>
+                <td>Mapeamento e Topografia</td>
+                <td>245</td>
+              </tr>
+              <tr>
+                <td>Filmagem Aérea</td>
+                <td>197</td>
+              </tr>
+              <tr>
+                <td>Inspeções de Construção</td>
+                <td>183</td>
+              </tr>
+              <tr>
+                <td>Imóveis e Tour 360°</td>
+                <td>156</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Ações rápidas -->
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">Ações Rápidas</h2>
+          </div>
+          
+          <div class="admin-btn-group" style="flex-direction: column;">
+            <a href="/institucional/admin-direto/paginas/criar.html" class="admin-btn admin-btn-primary" style="margin-bottom: 0.75rem;">
+              <i class="fas fa-plus admin-btn-icon"></i> Nova Página
+            </a>
+            <a href="/institucional/admin-direto/servicos/criar.html" class="admin-btn admin-btn-primary" style="margin-bottom: 0.75rem;">
+              <i class="fas fa-plus admin-btn-icon"></i> Novo Serviço
+            </a>
+            <a href="/institucional/admin-direto/galeria/upload.html" class="admin-btn admin-btn-primary" style="margin-bottom: 0.75rem;">
+              <i class="fas fa-upload admin-btn-icon"></i> Upload de Imagens
+            </a>
+            <a href="/institucional/admin-direto/secoes/criar.html" class="admin-btn admin-btn-primary">
+              <i class="fas fa-plus admin-btn-icon"></i> Nova Seção
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="/institucional/public/js/admin.js"></script>
+  <script>
+    // Funções simplificadas sem dependência de autenticação
+    function getAdminData() {
+      return {
+        name: 'Administrador',
+        email: 'admin@aereovisao.com.br',
+        role: 'admin'
+      };
+    }
+    
+    function setupAdminEnvironment() {
+      console.log('Ambiente administrativo carregado com acesso direto');
+    }
+    
+    // Função para voltar ao site principal preservando a navegação
+    function goToSite(event) {
+      event.preventDefault();
+      
+      // Limpar possíveis tokens do Portal principal para evitar conflitos
+      // Isso é importante para garantir que não haja interferência entre os sistemas
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userData');
+      
+      // Redirecionar para o site principal
+      window.location.href = '/site';
+    }
+    
+    // Ao carregar a página, configura o ambiente administrativo sem verificação
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Página de administração de acesso direto');
+      
+      // Não verifica autenticação - acesso direto permitido
+      setupAdminEnvironment();
+      
+      // Atualizar avatar e nome do usuário no painel
+      const userNameElement = document.querySelector('.admin-user-name');
+      const userAvatarElement = document.querySelector('.admin-user-avatar');
+      
+      if (userNameElement) {
+        userNameElement.textContent = 'Administrador';
+      }
+      
+      if (userAvatarElement) {
+        userAvatarElement.textContent = 'A';
+      }
+      
+      // Função para tratamento do logout sem redirecionamento
+      document.querySelector('.admin-logout').addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Esta é uma versão de acesso direto sem autenticação.');
+      });
+    });
+  </script>
+</body>
+</html>

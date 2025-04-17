@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Serviços - Aéreo Visão</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/institucional/public/css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo-container">
+        <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="admin-logo">
+      </div>
+      
+      <ul class="admin-nav">
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/index.html" class="admin-nav-link">
+            <i class="fas fa-tachometer-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/paginas/index.html" class="admin-nav-link">
+            <i class="fas fa-file-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Páginas</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/secoes/index.html" class="admin-nav-link">
+            <i class="fas fa-th-large admin-nav-icon"></i>
+            <span class="admin-nav-text">Seções</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/servicos/index.html" class="admin-nav-link active">
+            <i class="fas fa-cogs admin-nav-icon"></i>
+            <span class="admin-nav-text">Serviços</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/galeria/index.html" class="admin-nav-link">
+            <i class="fas fa-images admin-nav-icon"></i>
+            <span class="admin-nav-text">Galeria</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/configuracoes/index.html" class="admin-nav-link">
+            <i class="fas fa-cog admin-nav-icon"></i>
+            <span class="admin-nav-text">Configurações</span>
+          </a>
+        </li>
+      </ul>
+      
+      <a href="/site" class="admin-logout-link">
+        <i class="fas fa-sign-out-alt"></i> Voltar ao Site
+      </a>
+    </div>
+    
+    <!-- Conteúdo -->
+    <div class="admin-content">
+      <div class="admin-header">
+        <h1 class="admin-title">Gerenciar Serviços</h1>
+        
+        <div class="admin-user">
+          <div class="admin-user-avatar">A</div>
+          <div class="admin-user-info">
+            <span class="admin-user-name">Administrador</span>
+            <span class="admin-user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ações de topo -->
+      <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <a href="/institucional/admin/servicos/criar.html" class="admin-btn admin-btn-primary">
+            <i class="fas fa-plus admin-btn-icon"></i> Novo Serviço
+          </a>
+        </div>
+        
+        <div>
+          <div class="admin-form-group" style="margin-bottom: 0;">
+            <input type="text" placeholder="Buscar serviços..." class="admin-form-input" style="width: 250px;">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Listagem de serviços -->
+      <div class="admin-card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 60px;">ID</th>
+              <th>Título</th>
+              <th>URL</th>
+              <th style="width: 120px;">Status</th>
+              <th style="width: 150px;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Fotografia Aérea</td>
+              <td>/institucional/public/servicos/fotografia-aerea.html</td>
+              <td>
+                <span class="admin-badge admin-badge-success">Publicado</span>
+              </td>
+              <td>
+                <div class="admin-action-buttons">
+                  <a href="/institucional/public/servicos/fotografia-aerea.html" target="_blank" class="admin-action-btn admin-action-btn-view" title="Visualizar">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/institucional/admin/servicos/editar.html?id=1" class="admin-action-btn admin-action-btn-edit" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="admin-action-btn admin-action-btn-delete" data-resource="servico" data-id="1" data-name="Fotografia Aérea" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Filmagem Aérea</td>
+              <td>/institucional/public/servicos/filmagem-aerea.html</td>
+              <td>
+                <span class="admin-badge admin-badge-success">Publicado</span>
+              </td>
+              <td>
+                <div class="admin-action-buttons">
+                  <a href="/institucional/public/servicos/filmagem-aerea.html" target="_blank" class="admin-action-btn admin-action-btn-view" title="Visualizar">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/institucional/admin/servicos/editar.html?id=2" class="admin-action-btn admin-action-btn-edit" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="admin-action-btn admin-action-btn-delete" data-resource="servico" data-id="2" data-name="Filmagem Aérea" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Imóveis e Tour 360°</td>
+              <td>/institucional/public/servicos/imoveis-tour-360.html</td>
+              <td>
+                <span class="admin-badge admin-badge-success">Publicado</span>
+              </td>
+              <td>
+                <div class="admin-action-buttons">
+                  <a href="/institucional/public/servicos/imoveis-tour-360.html" target="_blank" class="admin-action-btn admin-action-btn-view" title="Visualizar">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/institucional/admin/servicos/editar.html?id=3" class="admin-action-btn admin-action-btn-edit" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="admin-action-btn admin-action-btn-delete" data-resource="servico" data-id="3" data-name="Imóveis e Tour 360°" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Inspeções de Construção</td>
+              <td>/institucional/public/servicos/inspecoes-construcao.html</td>
+              <td>
+                <span class="admin-badge admin-badge-success">Publicado</span>
+              </td>
+              <td>
+                <div class="admin-action-buttons">
+                  <a href="/institucional/public/servicos/inspecoes-construcao.html" target="_blank" class="admin-action-btn admin-action-btn-view" title="Visualizar">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/institucional/admin/servicos/editar.html?id=4" class="admin-action-btn admin-action-btn-edit" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="admin-action-btn admin-action-btn-delete" data-resource="servico" data-id="4" data-name="Inspeções de Construção" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Mapeamento e Topografia</td>
+              <td>/institucional/public/servicos/mapeamento-topografia.html</td>
+              <td>
+                <span class="admin-badge admin-badge-success">Publicado</span>
+              </td>
+              <td>
+                <div class="admin-action-buttons">
+                  <a href="/institucional/public/servicos/mapeamento-topografia.html" target="_blank" class="admin-action-btn admin-action-btn-view" title="Visualizar">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/institucional/admin/servicos/editar.html?id=5" class="admin-action-btn admin-action-btn-edit" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="admin-action-btn admin-action-btn-delete" data-resource="servico" data-id="5" data-name="Mapeamento e Topografia" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Treinamento de Pilotos</td>
+              <td>/institucional/public/servicos/treinamento-pilotos.html</td>
+              <td>
+                <span class="admin-badge admin-badge-success">Publicado</span>
+              </td>
+              <td>
+                <div class="admin-action-buttons">
+                  <a href="/institucional/public/servicos/treinamento-pilotos.html" target="_blank" class="admin-action-btn admin-action-btn-view" title="Visualizar">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="/institucional/admin/servicos/editar.html?id=6" class="admin-action-btn admin-action-btn-edit" title="Editar">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <button class="admin-action-btn admin-action-btn-delete" data-resource="servico" data-id="6" data-name="Treinamento de Pilotos" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Paginação -->
+      <div class="admin-pagination">
+        <a href="#" class="admin-pagination-item disabled">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="#" class="admin-pagination-item active">1</a>
+        <a href="#" class="admin-pagination-item disabled">
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="/institucional/public/js/admin.js"></script>
+</body>
+</html>

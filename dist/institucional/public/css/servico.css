@@ -1,0 +1,194 @@
+/* Estilo para páginas de serviços individuais */
+
+.servico-hero {
+  background-color: var(--primary);
+  color: white;
+  padding: 7rem 0 3rem;
+  text-align: center;
+}
+
+.servico-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+ 
+.servico-subtitle {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.servico-container {
+  padding: 3rem 0;
+}
+
+.servico-content {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+}
+
+.servico-main {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.servico-imagem-principal {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.servico-descricao {
+  padding: 2rem;
+}
+
+.servico-descricao h2 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.servico-descricao h3 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin: 2rem 0 1rem;
+}
+
+.servico-descricao p {
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.servico-lista {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.servico-lista li {
+  color: #4b5563;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.servico-cta {
+  background-color: #f8fafc;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.servico-cta h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.servico-cta .btn {
+  margin-top: 1rem;
+}
+
+.servico-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.servico-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.servico-card h3 {
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.servico-features {
+  list-style: none;
+  padding: 0;
+}
+
+.servico-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: #4b5563;
+}
+
+.servico-features i {
+  color: var(--primary);
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.servico-links {
+  list-style: none;
+  padding: 0;
+}
+
+.servico-links li {
+  margin-bottom: 0.75rem;
+}
+
+.servico-links a {
+  color: var(--primary);
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s;
+}
+
+.servico-links a:hover {
+  background-color: #f8fafc;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .servico-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .servico-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .servico-card {
+    flex: 1 1 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servico-hero {
+    padding: 6rem 0 2rem;
+  }
+  
+  .servico-title {
+    font-size: 2rem;
+  }
+  
+  .servico-imagem-principal {
+    height: 300px;
+  }
+  
+  .servico-sidebar {
+    flex-direction: column;
+  }
+}

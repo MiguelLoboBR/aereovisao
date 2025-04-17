@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login de Administrador | Aéreo Visão - Site Institucional</title>
+  <link rel="stylesheet" href="/institucional/public/css/admin.css">
+  <style>
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .logo img {
+      max-width: 200px;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #0056b3;
+      margin-bottom: 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .btn {
+      display: inline-block;
+      background-color: #0056b3;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    
+    .btn:hover {
+      background-color: #003d82;
+    }
+    
+    .alert {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    
+    .alert-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+    .links {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .links a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+    
+    .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão Logo">
+    </div>
+    <h1>Login de Administrador</h1>
+    
+    <div id="alert" class="alert alert-danger" style="display: none;"></div>
+    
+    <form id="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" autocomplete="current-password" id="password" name="password" required>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn">Entrar</button>
+      </div>
+    </form>
+    
+    <div class="links">
+      <a href="/institucional/admin/register.html">Não tem uma conta? Cadastre-se</a>
+    </div>
+  </div>
+
+  <script src="/institucional/public/js/admin-auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Verifica se o usuário já está autenticado
+      if (await redirectIfAuthenticated()) return;
+      
+      const loginForm = document.getElementById('login-form');
+      const alertBox = document.getElementById('alert');
+      
+      loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        try {
+          // Limpar tokens do Portal principal para evitar conflitos
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('userData');
+          
+          // Usando a função de login do módulo admin-auth.js
+          const data = await login(email, password);
+          
+          // Verificar se o login foi bem-sucedido
+          if (data && data.token && data.admin) {
+            console.log("Login institucional bem-sucedido!", data.admin.name);
+            
+            // Pequeno timeout para garantir que o localStorage foi atualizado
+            setTimeout(() => {
+              // Usar o protocolo completo do URL para garantir que não há interferência do React Router
+              window.location.replace(window.location.origin + '/institucional/admin/index.html');
+            }, 100);
+          } else {
+            throw new Error("Falha no login. Tente novamente.");
+          }
+          
+        } catch (error) {
+          alertBox.textContent = error.message || 'Erro ao fazer login. Verifique suas credenciais.';
+          alertBox.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

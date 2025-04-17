@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Galeria - Aéreo Visão</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/institucional/public/css/admin.css">
+  
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      background-color: #f9fafb;
+      transition: transform 0.3s;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .gallery-image-container {
+      position: relative;
+      height: 180px;
+    }
+    
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .gallery-content {
+      padding: 1rem;
+    }
+    
+    .gallery-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .gallery-category {
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .gallery-actions {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .gallery-action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #4b5563;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .gallery-action-btn:hover {
+      background-color: white;
+    }
+    
+    .gallery-action-edit:hover {
+      color: var(--primary);
+    }
+    
+    .gallery-action-delete:hover {
+      color: var(--danger);
+    }
+    
+    .gallery-upload-card {
+      height: 100%;
+      min-height: 250px;
+      border: 2px dashed #e5e7eb;
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .gallery-upload-card:hover {
+      border-color: var(--primary);
+    }
+    
+    .gallery-upload-icon {
+      font-size: 2rem;
+      color: #6b7280;
+      margin-bottom: 1rem;
+    }
+    
+    .gallery-upload-text {
+      color: #6b7280;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .gallery-filter {
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      background-color: white;
+      border: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .gallery-filter:hover {
+      background-color: #f3f4f6;
+    }
+    
+    .gallery-filter.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo-container">
+        <img src="/attached_assets/Aéreo Visao Logo_Png.png" alt="Aéreo Visão" class="admin-logo">
+      </div>
+      
+      <ul class="admin-nav">
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/index.html" class="admin-nav-link">
+            <i class="fas fa-tachometer-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/paginas/index.html" class="admin-nav-link">
+            <i class="fas fa-file-alt admin-nav-icon"></i>
+            <span class="admin-nav-text">Páginas</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/secoes/index.html" class="admin-nav-link">
+            <i class="fas fa-th-large admin-nav-icon"></i>
+            <span class="admin-nav-text">Seções</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/servicos/index.html" class="admin-nav-link">
+            <i class="fas fa-cogs admin-nav-icon"></i>
+            <span class="admin-nav-text">Serviços</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/galeria/index.html" class="admin-nav-link active">
+            <i class="fas fa-images admin-nav-icon"></i>
+            <span class="admin-nav-text">Galeria</span>
+          </a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="/institucional/admin/configuracoes/index.html" class="admin-nav-link">
+            <i class="fas fa-cog admin-nav-icon"></i>
+            <span class="admin-nav-text">Configurações</span>
+          </a>
+        </li>
+      </ul>
+      
+      <a href="/site" class="admin-logout-link">
+        <i class="fas fa-sign-out-alt"></i> Voltar ao Site
+      </a>
+    </div>
+    
+    <!-- Conteúdo -->
+    <div class="admin-content">
+      <div class="admin-header">
+        <h1 class="admin-title">Gerenciar Galeria</h1>
+        
+        <div class="admin-user">
+          <div class="admin-user-avatar">A</div>
+          <div class="admin-user-info">
+            <span class="admin-user-name">Administrador</span>
+            <span class="admin-user-role">Admin</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ações de topo -->
+      <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <a href="/institucional/admin/galeria/upload.html" class="admin-btn admin-btn-primary">
+            <i class="fas fa-upload admin-btn-icon"></i> Upload de Imagens
+          </a>
+        </div>
+        
+        <div>
+          <div class="admin-form-group" style="margin-bottom: 0;">
+            <input type="text" placeholder="Buscar na galeria..." class="admin-form-input" style="width: 250px;">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Filtros da galeria -->
+      <div class="gallery-filters">
+        <button class="gallery-filter active" data-filter="all">Todas</button>
+        <button class="gallery-filter" data-filter="fotografia">Fotografia</button>
+        <button class="gallery-filter" data-filter="filmagem">Filmagem</button>
+        <button class="gallery-filter" data-filter="mapeamento">Mapeamento</button>
+        <button class="gallery-filter" data-filter="inspecao">Inspeção</button>
+        <button class="gallery-filter" data-filter="imoveis">Imóveis</button>
+        <button class="gallery-filter" data-filter="treinamento">Treinamento</button>
+      </div>
+      
+      <!-- Grid da galeria -->
+      <div class="gallery-grid">
+        <!-- Item 1 -->
+        <div class="gallery-item" data-category="fotografia">
+          <div class="gallery-image-container">
+            <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Imagem aérea" class="gallery-image">
+            <div class="gallery-actions">
+              <button class="gallery-action-btn gallery-action-edit" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="gallery-action-btn gallery-action-delete" data-id="1" data-name="Paisagem aérea" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="gallery-content">
+            <h3 class="gallery-title">Paisagem aérea</h3>
+            <div class="gallery-category">Fotografia</div>
+          </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="gallery-item" data-category="inspecao">
+          <div class="gallery-image-container">
+            <img src="https://images.unsplash.com/photo-1508514077092-f2e9b98a2f66?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Inspeção de torre" class="gallery-image">
+            <div class="gallery-actions">
+              <button class="gallery-action-btn gallery-action-edit" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="gallery-action-btn gallery-action-delete" data-id="2" data-name="Inspeção de torre" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="gallery-content">
+            <h3 class="gallery-title">Inspeção de torre</h3>
+            <div class="gallery-category">Inspeção</div>
+          </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="gallery-item" data-category="filmagem">
+          <div class="gallery-image-container">
+            <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Filmagem aérea" class="gallery-image">
+            <div class="gallery-actions">
+              <button class="gallery-action-btn gallery-action-edit" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="gallery-action-btn gallery-action-delete" data-id="3" data-name="Filmagem aérea" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="gallery-content">
+            <h3 class="gallery-title">Filmagem aérea</h3>
+            <div class="gallery-category">Filmagem</div>
+          </div>
+        </div>
+        
+        <!-- Item 4 -->
+        <div class="gallery-item" data-category="mapeamento">
+          <div class="gallery-image-container">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Mapeamento topográfico" class="gallery-image">
+            <div class="gallery-actions">
+              <button class="gallery-action-btn gallery-action-edit" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="gallery-action-btn gallery-action-delete" data-id="4" data-name="Mapeamento topográfico" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="gallery-content">
+            <h3 class="gallery-title">Mapeamento topográfico</h3>
+            <div class="gallery-category">Mapeamento</div>
+          </div>
+        </div>
+        
+        <!-- Item 5 -->
+        <div class="gallery-item" data-category="imoveis">
+          <div class="gallery-image-container">
+            <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Imóvel vista aérea" class="gallery-image">
+            <div class="gallery-actions">
+              <button class="gallery-action-btn gallery-action-edit" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="gallery-action-btn gallery-action-delete" data-id="5" data-name="Imóvel vista aérea" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="gallery-content">
+            <h3 class="gallery-title">Imóvel vista aérea</h3>
+            <div class="gallery-category">Imóveis</div>
+          </div>
+        </div>
+        
+        <!-- Item 6 -->
+        <div class="gallery-item" data-category="treinamento">
+          <div class="gallery-image-container">
+            <img src="https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Treinamento de pilotos" class="gallery-image">
+            <div class="gallery-actions">
+              <button class="gallery-action-btn gallery-action-edit" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="gallery-action-btn gallery-action-delete" data-id="6" data-name="Treinamento de pilotos" title="Excluir">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="gallery-content">
+            <h3 class="gallery-title">Treinamento de pilotos</h3>
+            <div class="gallery-category">Treinamento</div>
+          </div>
+        </div>
+        
+        <!-- Adicionar novo item -->
+        <a href="/institucional/admin/galeria/upload.html" class="gallery-item gallery-upload-card">
+          <div class="gallery-upload-icon">
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="gallery-upload-text">
+            Adicionar nova imagem à galeria
+          </div>
+        </a>
+      </div>
+      
+      <!-- Paginação -->
+      <div class="admin-pagination" style="margin-top: 2rem;">
+        <a href="#" class="admin-pagination-item disabled">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <a href="#" class="admin-pagination-item active">1</a>
+        <a href="#" class="admin-pagination-item disabled">
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script src="/institucional/public/js/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar filtros de galeria
+      const filters = document.querySelectorAll('.gallery-filter');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filters.forEach(filter => {
+        filter.addEventListener('click', () => {
+          // Remover classe active de todos os filtros
+          filters.forEach(f => f.classList.remove('active'));
+          
+          // Adicionar classe active ao filtro clicado
+          filter.classList.add('active');
+          
+          // Filtrar itens da galeria
+          const category = filter.getAttribute('data-filter');
+          
+          galleryItems.forEach(item => {
+            if (category === 'all' || item.getAttribute('data-category') === category || !item.hasAttribute('data-category')) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Inicializar botões de exclusão
+      const deleteButtons = document.querySelectorAll('.gallery-action-delete');
+      
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const id = button.getAttribute('data-id');
+          const name = button.getAttribute('data-name');
+          
+          if (confirm(`Tem certeza que deseja excluir a imagem "${name}"? Esta ação não pode ser desfeita.`)) {
+            // Em uma implementação real, isso seria uma chamada para a API
+            // Para fins de demonstração, apenas remover o elemento do DOM
+            const galleryItem = button.closest('.gallery-item');
+            if (galleryItem) {
+              galleryItem.remove();
+            }
+            
+            // Mostrar notificação
+            showNotification('Imagem excluída com sucesso!', 'success');
+          }
+        });
+      });
+      
+      // Inicializar botões de edição
+      const editButtons = document.querySelectorAll('.gallery-action-edit');
+      
+      editButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const galleryItem = button.closest('.gallery-item');
+          const id = galleryItem.querySelector('.gallery-action-delete').getAttribute('data-id');
+          
+          // Redirecionar para a página de edição
+          window.location.href = `/institucional/admin/galeria/editar.html?id=${id}`;
+        });
+      });
+      
+      // Função para exibir notificações
+      function showNotification(message, type = 'info') {
+        // Verificar se já existe uma notificação
+        let notification = document.querySelector('.admin-notification');
+        
+        if (!notification) {
+          // Criar elemento de notificação
+          notification = document.createElement('div');
+          notification.className = 'admin-notification';
+          document.body.appendChild(notification);
+        }
+        
+        // Definir classe baseada no tipo
+        notification.className = `admin-notification admin-notification-${type}`;
+        notification.innerHTML = message;
+        
+        // Mostrar a notificação
+        notification.style.display = 'block';
+        
+        // Remover após alguns segundos
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>
