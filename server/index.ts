@@ -1,142 +1,87 @@
-import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
-import cors from "cors";
+import express, { type Express } from "express";
+import fs from "fs";
 import path from "path";
-import { initializeInstitucionalAdmin } from "./initialize-institucional";
+import { fileURLToPath } from "url";
+import { createServer as createViteServer, createLogger } from "vite";
+import { type Server } from "http";
+import viteConfig from "../vite.config";
+import { nanoid } from "nanoid";
 
-const app = express();
+// ==== shim para __dirname em ESM ====
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// ====================================
 
-// CORS padrão Replit
-app.use(
-  cors({
-    origin: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+const viteLogger = createLogger();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+export function log(message: string, source = "express") {
+  const formattedTime = new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+  });
+  console.log(`${formattedTime} [${source}] ${message}`);
+}
 
-// Arquivos estáticos gerais
-app.use(
-  "/uploads",
-  express.static(path.join(process.cwd(), "uploads"))
-);
-app.use(
-  "/assets",
-  express.static(path.join(process.cwd(), "public", "assets"))
-);
-app.use(
-  "/attached_assets",
-  express.static(path.join(process.cwd(), "attached_assets"))
-);
+export async function setupVite(app: Express, server: Server) {
+  const serverOptions = {
+    middlewareMode: true,
+    hmr: { server },
+    allowedHosts: true,
+  };
 
-(async () => {
-  // Inicialização institucional (banco, seed, etc.)
-  await initializeInstitucionalAdmin();
-
-  // Registrar rotas e obter o servidor HTTP
-  const server = await registerRoutes(app);
-
-  // Middleware de log detalhado
-  app.use((req, res, next) => {
-    const start = Date.now();
-    const reqPath = req.path;
-    const origin = req.headers.origin || "unknown";
-
-    console.log(
-      `[${new Date().toISOString()}] ${req.method} ${reqPath} - Origin: ${origin}`
-    );
-
-    const originalJson = res.json.bind(res);
-    res.json = (bodyJson: any, ...args: any[]) => {
-      const logLine = `${req.method} ${reqPath} ${res.statusCode} :: ${JSON.stringify(
-        bodyJson
-      )}`;
-      log(
-        logLine.length > 100
-          ? logLine.slice(0, 100) + "…"
-          : logLine
-      );
-      return originalJson(bodyJson, ...args);
-    };
-
-    res.on("finish", () => {
-      const duration = Date.now() - start;
-      if (reqPath.startsWith("/api")) {
-        log(`${req.method} ${reqPath} ${res.statusCode} em ${duration}ms`);
-      }
-    });
-
-    next();
+  const vite = await createViteServer({
+    ...viteConfig,
+    configFile: false,
+    customLogger: {
+      ...viteLogger,
+      error: (msg, options) => {
+        viteLogger.error(msg, options);
+        process.exit(1);
+      },
+    },
+    server: serverOptions,
+    appType: "custom",
   });
 
-  // Global error handler
-  app.use(
-    (err: any, _req: Request, res: Response, _next: NextFunction) => {
-      console.error("Erro na aplicação:", err);
-      const status = err.status || err.statusCode || 500;
-      const message = err.message || "Internal Server Error";
-      res.status(status).json({ message });
-    }
-  );
-
-  if (process.env.NODE_ENV === "development") {
-    // Modo desenvolvimento com Vite
-    await setupVite(app, server);
-  } else {
-    // Produção
-
-    // Servir assets do site institucional (dist/institucional)
-    app.use(
-      "/institucional",
-      express.static(
-        path.join(process.cwd(), "dist", "institucional")
-      )
-    );
-    app.use(
-      "/admin-direto",
-      express.static(
-        path.join(
-          process.cwd(),
-          "dist",
-          "institucional",
-          "admin-direto"
-        )
-      )
-    );
-
-    // Rota raiz para o index institucional
-    app.get("/", (_req, res) => {
-      const institucionalIndexPath = path.join(
-        process.cwd(),
-        "dist",
-        "institucional",
+  app.use(vite.middlewares);
+  app.use("*", async (req, res, next) => {
+    const url = req.originalUrl;
+    try {
+      const clientTemplatePath = path.resolve(
+        __dirname,
+        "..",
+        "client",
         "index.html"
       );
-      console.log(
-        `Servindo institucional raiz: ${institucionalIndexPath}`
+      let template = await fs.promises.readFile(clientTemplatePath, "utf-8");
+      template = template.replace(
+        `src=\"/src/main.tsx\"`,
+        `src=\"/src/main.tsx?v=${nanoid()}\"`
       );
-      res.sendFile(institucionalIndexPath);
-    });
+      const page = await vite.transformIndexHtml(url, template);
+      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+    } catch (e) {
+      vite.ssrFixStacktrace(e as Error);
+      next(e);
+    }
+  });
+}
 
-    // Servir o React build (SPA) em dist/public
-    serveStatic(app);
+export function serveStatic(app: Express) {
+  // Em produção servimos do build gerado em dist/public
+  const distPath = path.resolve(process.cwd(), "dist", "public");
+  if (!fs.existsSync(distPath)) {
+    throw new Error(
+      `Could not find the build directory: ${distPath}, make sure to build the client first`
+    );
   }
 
-  // Start do servidor na porta que o Railway fornecer
-  const port = Number(process.env.PORT) || 8080;
-  server.listen(
-    {
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    },
-    () => {
-      log(`✅ Servidor iniciado em http://localhost:${port}`);
-    }
-  );
-})();
+  app.use(express.static(distPath));
+
+  // SPA fallback para index.html
+  app.use("*", (_req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
